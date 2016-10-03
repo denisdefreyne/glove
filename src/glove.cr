@@ -1,7 +1,7 @@
 # externals
 require "./gl"
 require "./glm"
-require "glove_stb_image"
+require "./stb_image"
 require "http/server"
 
 # basic types

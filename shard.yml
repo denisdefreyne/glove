@@ -5,3 +5,6 @@ authors:
   - Denis Defreyne <denis@stoneship.org>
 
 license: MIT
+
+scripts:
+  postinstall: cd ext && make
