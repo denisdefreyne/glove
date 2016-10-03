@@ -9,7 +9,7 @@ class Glove::Components::Transform < Glove::Component
   property :anchor_x
   property :anchor_y
 
-  @model_matrix : GLM::TMat4(Float32)
+  @model_matrix : Glove::GLM::TMat4(Float32)
 
   def initialize
     @width = 0_f32
@@ -22,15 +22,15 @@ class Glove::Components::Transform < Glove::Component
     @anchor_x = 0.5_f32
     @anchor_y = 0.5_f32
 
-    @model_matrix = GLM::Mat4.identity
+    @model_matrix = Glove::GLM::Mat4.identity
   end
 
   def matrix
-    GLM.identity(@model_matrix)
-    GLM.translate(@model_matrix, @translate_x, @translate_y)
-    GLM.rotate_z(@model_matrix, @angle)
-    GLM.scale(@model_matrix, @width * @scale_x, @height * @scale_y)
-    GLM.translate(@model_matrix, -@anchor_x, -@anchor_y)
+    Glove::GLM.identity(@model_matrix)
+    Glove::GLM.translate(@model_matrix, @translate_x, @translate_y)
+    Glove::GLM.rotate_z(@model_matrix, @angle)
+    Glove::GLM.scale(@model_matrix, @width * @scale_x, @height * @scale_y)
+    Glove::GLM.translate(@model_matrix, -@anchor_x, -@anchor_y)
 
     @model_matrix
   end

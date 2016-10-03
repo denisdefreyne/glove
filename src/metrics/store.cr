@@ -1,4 +1,4 @@
-class Metrics::Store
+class Glove::Metrics::Store
   def initialize
     @counters = {} of Symbol => Float64
     @gauges = {} of Symbol => Float64

@@ -1,5 +1,5 @@
 class Glove::Renderer
-  NULL_TRANSFORM = GLM::Mat4.identity
+  NULL_TRANSFORM = Glove::GLM::Mat4.identity
 
   @shader_program : Glove::ShaderProgram
 
@@ -10,18 +10,18 @@ class Glove::Renderer
   end
 
   private def projection_matrix(entities)
-    projection_matrix = GLM::Mat4.identity
-    GLM.translate(projection_matrix, -1.0_f32, -1.0_f32)
-    GLM.scale(projection_matrix, 2.0_f32/@width, 2.0_f32/@height)
+    projection_matrix = Glove::GLM::Mat4.identity
+    Glove::GLM.translate(projection_matrix, -1.0_f32, -1.0_f32)
+    Glove::GLM.scale(projection_matrix, 2.0_f32/@width, 2.0_f32/@height)
 
     if cameras = entities.find(Glove::Components::Camera)
       if camera = cameras[0]?
         if transform = camera.transform
-          GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
-          GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
-          GLM.rotate_z(projection_matrix, transform.angle)
-          GLM.translate(projection_matrix, -@width/2_f32, -@height/2_f32)
-          GLM.translate(projection_matrix, transform.translate_x, transform.translate_y)
+          Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
+          Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
+          Glove::GLM.rotate_z(projection_matrix, transform.angle)
+          Glove::GLM.translate(projection_matrix, -@width/2_f32, -@height/2_f32)
+          Glove::GLM.translate(projection_matrix, transform.translate_x, transform.translate_y)
         end
       end
     end
@@ -42,7 +42,7 @@ class Glove::Renderer
     render(entity, matrix)
   end
 
-  private def render(entity : Glove::Entity, matrix : GLM::Mat4)
+  private def render(entity : Glove::Entity, matrix : Glove::GLM::Mat4)
     gl_checked(@shader_program.set_uniform_matrix_4f("model", false, matrix))
 
     gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id_for(entity)))

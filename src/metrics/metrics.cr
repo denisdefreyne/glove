@@ -1,4 +1,4 @@
-module Metrics
+module Glove::Metrics
 end
 
 require "./store"

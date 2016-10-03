@@ -17,7 +17,7 @@ struct Float64
   end
 end
 
-module GLM
+module Glove::GLM
   struct TMat4(T)
     @buffer : T*
 

@@ -10,7 +10,7 @@ macro gl_checked(call)
   value
 end
 
-module GL
+module Glove::GL
   def self.check_error(where="")
     if error = GL.last_error
       puts "GL error @ #{where}: 0x#{error.to_s(16)} (#{GL.last_error_message})"

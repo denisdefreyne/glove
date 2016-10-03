@@ -19,7 +19,7 @@ abstract class Glove::App
 
   def initialize(@width : Int32, @height : Int32, @title : String)
     @clear_color = Color::BLACK
-    @metrics = Metrics::Store.new
+    @metrics = Glove::Metrics::Store.new
     @event_queue = Glove::EventQueue.new
     @prev_cursor_position = Point.new(0_f32, 0_f32)
 
@@ -84,11 +84,11 @@ abstract class Glove::App
     LibGLFW.set_mouse_button_callback(@window, mouse_button_callback)
 
     GLEW.experimental = LibGL::TRUE
-    GL.check_error("before GLEW.init")
+    Glove::GL.check_error("before GLEW.init")
     unless GLEW.init == GLEW::OK
       raise "GLEW.init failed"
     end
-    GL.check_error("after GLEW.init")
+    Glove::GL.check_error("after GLEW.init")
     puts "The previous INVALID_ENUM error (if any) can be safely ignored."
 
     LibGLFW.set_input_mode(@window, LibGLFW::CURSOR, LibGLFW::CURSOR_DISABLED)
