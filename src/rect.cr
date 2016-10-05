@@ -34,6 +34,16 @@ struct Glove::Rect
   end
 
   def overlaps_with?(other : Glove::Rect)
-    self.left < other.right && self.right > other.left && self.bottom < other.top && self.top > other.bottom
+    self.left < other.right &&
+      self.right > other.left &&
+      self.bottom < other.top &&
+      self.top > other.bottom
+  end
+
+  def overlaps_on_bottom_with?(other : Glove::Rect)
+    self.left < other.right &&
+      self.right > other.left &&
+      self.bottom < other.top &&
+      self.bottom > other.bottom
   end
 end
