@@ -114,6 +114,10 @@ abstract class Glove::App
     @cursor.to_point
   end
 
+  def key_pressed?(key)
+    LibGLFW.get_key(window, key) == LibGLFW::PRESS
+  end
+
   def run
     self2 = self
     self_ptr = pointerof(self2).as(Void*)
