@@ -16,7 +16,7 @@ class Glove::Renderer
 
     if cameras = entities.all_with_component(Glove::Components::Camera)
       if camera = cameras[0]?
-        if transform = camera.transform
+        if transform = camera[Glove::Components::Transform]?
           Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
           Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
           Glove::GLM.rotate_z(projection_matrix, transform.angle)
@@ -60,7 +60,7 @@ class Glove::Renderer
   end
 
   private def transform_matrix_for(entity : Glove::Entity)
-    if transform = entity.transform
+    if transform = entity[Glove::Components::Transform]?
       transform.matrix
     else
       NULL_TRANSFORM

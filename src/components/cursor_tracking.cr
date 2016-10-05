@@ -9,7 +9,7 @@ class Glove::Components::CursorTracking < ::Glove::Component
   end
 
   def update(entity, delta_time, space, app)
-    if transform = entity.transform
+    if transform = entity[Glove::Components::Transform]?
       bounds = transform.bounds
       point = Glove::Point.new(app.cursor_position.x, app.cursor_position.y)
       new_inside = bounds.contains?(point)

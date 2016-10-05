@@ -28,10 +28,6 @@ class Glove::Entity
     @dead = false
   end
 
-  def transform
-    self[Glove::Components::Transform]?
-  end
-
   def <<(component)
     @components << component
     @components_by_name[component.class.sym] = component

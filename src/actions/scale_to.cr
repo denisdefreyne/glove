@@ -8,7 +8,7 @@ class Glove::Actions::ScaleTo < Glove::IntervalAction
   end
 
   def start
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       @scale_x = transform.scale_x
       @scale_y = transform.scale_y
     end
@@ -18,7 +18,7 @@ class Glove::Actions::ScaleTo < Glove::IntervalAction
     @tween.update(delta_time)
     return if @tween.complete?
 
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       f = @tween.fraction
       transform.scale_x = f * @new_scale_x + (1_f32 - f) * @scale_x
       transform.scale_y = f * @new_scale_y + (1_f32 - f) * @scale_y

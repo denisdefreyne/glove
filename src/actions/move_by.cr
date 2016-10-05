@@ -13,7 +13,7 @@ class Glove::Actions::MoveBy < Glove::IntervalAction
   end
 
   def start
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       @x = transform.translate_x
       @y = transform.translate_y
       @new_x = @x + @dx
@@ -25,7 +25,7 @@ class Glove::Actions::MoveBy < Glove::IntervalAction
     @tween.update(delta_time)
     return if @tween.complete?
 
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       f = @tween.fraction
       transform.translate_x = f * @new_x + (1_f32 - f) * @x
       transform.translate_y = f * @new_y + (1_f32 - f) * @y

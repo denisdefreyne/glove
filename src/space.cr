@@ -31,7 +31,7 @@ class Glove::Space
         entities.find do |entity|
           if entity.mouse_event_handler.nil?
             false
-          elsif transform = entity.transform
+          elsif transform = entity[Glove::Components::Transform]?
             transform.bounds.contains?(app.cursor_position)
           else
             false

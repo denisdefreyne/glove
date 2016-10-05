@@ -10,7 +10,7 @@ class Glove::Actions::RotateBy < Glove::IntervalAction
   end
 
   def start
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       @angle = transform.angle
       @new_angle = @angle + @angle_diff
     end
@@ -20,7 +20,7 @@ class Glove::Actions::RotateBy < Glove::IntervalAction
     @tween.update(delta_time)
     return if @tween.complete?
 
-    if transform = @entity.transform
+    if transform = @entity[Glove::Components::Transform]?
       f = @tween.fraction
       transform.angle = f * @new_angle + (1_f32 - f) * @angle
     end
