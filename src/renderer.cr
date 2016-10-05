@@ -20,8 +20,7 @@ class Glove::Renderer
           Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
           Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
           Glove::GLM.rotate_z(projection_matrix, transform.angle)
-          Glove::GLM.translate(projection_matrix, -@width/2_f32, -@height/2_f32)
-          Glove::GLM.translate(projection_matrix, transform.translate_x, transform.translate_y)
+          Glove::GLM.translate(projection_matrix, -transform.translate_x, -transform.translate_y)
         end
       end
     end
