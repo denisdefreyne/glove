@@ -4,4 +4,8 @@ struct Glove::Size
 
   def initialize(@width : Float32, @height : Float32)
   end
+
+  def inspect(io)
+    io << "Size(width = " << @width << ", height = " << @height << ")"
+  end
 end

@@ -12,4 +12,8 @@ struct Glove::Point
   def -(other : Glove::Point)
     Glove::Vector.new(@x - other.x, @y - other.y)
   end
+
+  def inspect(io)
+    io << "Point(x = " << @x << ", y = " << @y << ")"
+  end
 end
