@@ -53,8 +53,10 @@ abstract class Glove::App
           :down
         when LibGLFW::RELEASE
           :up
+        when LibGLFW::REPEAT
+          :repeat
         else
-          raise "???"
+          raise "Unexpected direction: #{action.inspect}"
         end
 
       app.event_queue << Glove::Events::Key.new(direction, key)
