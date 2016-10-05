@@ -14,7 +14,7 @@ class Glove::Renderer
     Glove::GLM.translate(projection_matrix, -1.0_f32, -1.0_f32)
     Glove::GLM.scale(projection_matrix, 2.0_f32/@width, 2.0_f32/@height)
 
-    if cameras = entities.find(Glove::Components::Camera)
+    if cameras = entities.all_with_component(Glove::Components::Camera)
       if camera = cameras[0]?
         if transform = camera.transform
           Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)

@@ -7,7 +7,7 @@ abstract class Glove::Component
     end
 
     class ::Glove::EntityCollection
-      def find(klass : {{ @type.name.id.stringify.camelcase.id }}.class)
+      def all_with_component(klass : {{ @type.name.id.stringify.camelcase.id }}.class)
         @entities.select { |e| e[{{ @type.name.id.stringify.camelcase.id }}]? }
       end
     end
