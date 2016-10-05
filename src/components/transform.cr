@@ -36,33 +36,22 @@ class Glove::Components::Transform < Glove::Component
   end
 
   def bounds
-    actual_scale_x = @width * @scale_x
-    actual_scale_y = @height * @scale_y
+    m = matrix
 
-    angle = @angle
-    cos = Math.cos(angle)
-    sin = Math.sin(angle)
-    dxs = [
-      actual_scale_x / 2 * cos - actual_scale_y / 2 * sin,
-      actual_scale_x / 2 * cos + actual_scale_y / 2 * sin,
-      -actual_scale_x / 2 * cos - actual_scale_y / 2 * sin,
-      -actual_scale_x / 2 * cos + actual_scale_y / 2 * sin,
-    ]
-    dys = [
-      actual_scale_x / 2 * sin - actual_scale_y / 2 * cos,
-      actual_scale_x / 2 * sin + actual_scale_y / 2 * cos,
-      -actual_scale_x / 2 * sin - actual_scale_y / 2 * cos,
-      -actual_scale_x / 2 * sin + actual_scale_y / 2 * cos,
+    points = [
+      m.transform(0_f32, 0_f32),
+      m.transform(0_f32, 1_f32),
+      m.transform(1_f32, 0_f32),
+      m.transform(1_f32, 1_f32),
     ]
 
-    left = @translate_x + dxs.min
-    right = @translate_x + dxs.max
+    min_x = points.map { |po| po[0] }.min
+    min_y = points.map { |po| po[1] }.min
+    max_x = points.map { |po| po[0] }.max
+    max_y = points.map { |po| po[1] }.max
 
-    top = @translate_y + dys.max
-    bottom = @translate_y + dys.min
-
-    origin = Glove::Point.new(left.to_f32, bottom.to_f32)
-    size = Glove::Size.new((right - left).to_f32, (top - bottom).to_f32)
+    origin = Glove::Point.new(min_x, min_y)
+    size = Glove::Size.new(max_x - min_x, max_y - min_y)
     Glove::Rect.new(origin, size)
   end
 end

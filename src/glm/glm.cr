@@ -103,6 +103,13 @@ module Glove::GLM
       res
     end
 
+    def transform(x : Float32, y : Float32)
+      new_x = self[0, 0] * x + self[0, 1] * y + self[0, 3]
+      new_y = self[1, 0] * x + self[1, 1] * y + self[1, 3]
+
+      {new_x, new_y}
+    end
+
     def inspect(io)
       io << String.build do |sb|
         sb << "+------------+------------+------------+------------+\n"
