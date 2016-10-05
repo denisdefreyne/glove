@@ -34,6 +34,19 @@ abstract class Glove::Component
           raise "???"
         end
       end
+
+      def has_component?(klass : {{ @type.name.id.stringify.camelcase.id }}.class)
+        %component = self[{{ @type.name.id }}.sym]?
+        case %component
+        when nil
+          false
+        when {{ @type.name.id }}
+          true
+        else
+          raise "???"
+        end
+      end
+
     end
   end
 
