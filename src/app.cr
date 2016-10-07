@@ -85,6 +85,12 @@ abstract class Glove::App
     end
     LibGLFW.set_mouse_button_callback(@window, mouse_button_callback)
 
+    scroll_callback = ->(window : LibGLFW::Window, dx : Float64, dy : Float64) do
+      app = LibGLFW.get_window_user_pointer(window).as(App*).value
+      app.event_queue << Glove::Events::Scrolled.new(dx, dy)
+    end
+    LibGLFW.set_scroll_callback(@window, scroll_callback)
+
     GLEW.experimental = LibGL::TRUE
     Glove::GL.check_error("before GLEW.init")
     unless GLEW.init == GLEW::OK

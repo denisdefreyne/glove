@@ -50,6 +50,12 @@ class Glove::Space
           mouse_event_handler.handle(event, entity, self, app)
         end
       end
+    when Glove::Events::Scrolled
+      entities.each do |entity|
+        if mouse_event_handler = entity.mouse_event_handler
+          mouse_event_handler.handle(event, entity, self, app)
+        end
+      end
     end
   end
 end

@@ -5,6 +5,7 @@ lib LibGLFW
   type ErrorCallback = (Int32, UInt8*) -> Void
   type KeyCallback = (Window, Int32, Int32, Int32, Int32) -> Void
   type MouseButtonCallback = (Window, Int32, Int32, Int32) -> Void
+  type ScrollCallback = (Window, Float64, Float64) -> Void
 
   SAMPLES = 0x0002100D_i32
 
@@ -156,6 +157,8 @@ lib LibGLFW
     window : Window, callback : KeyCallback) : KeyCallback
   fun set_mouse_button_callback = glfwSetMouseButtonCallback(
     window : Window, callback : MouseButtonCallback) : MouseButtonCallback
+  fun set_scroll_callback = glfwSetScrollCallback(
+    window : Window, callback : ScrollCallback) : ScrollCallback
 
   fun set_window_user_pointer = glfwSetWindowUserPointer(
     window : Window, pointer : Void*) : Void
