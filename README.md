@@ -1,6 +1,6 @@
 # Glove
 
-**Status:** Experimental.
+**Status:** Experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
 
 A [Crystal](https://crystal-lang.org/) library for making games.
 
