@@ -6,7 +6,6 @@
 # - EventHandlers::MouseButton (to get mouse up/down events)
 
 class Glove::Entity
-  property :polygon
   property :components
   property :mouse_event_handler
   property :keyboard_event_handler
@@ -14,7 +13,6 @@ class Glove::Entity
   getter :children
   property :z
 
-  @polygon : Glove::Quad? # TODO: rename Quad to Polygon… or so.
   @mouse_event_handler : Glove::EventHandler? # FIXME
   @keyboard_event_handler : Glove::EventHandler? # FIXME
 

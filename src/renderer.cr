@@ -7,6 +7,8 @@ class Glove::Renderer
     @shader_program = ShaderProgram.from(
       "shaders/vertex_shader.glsl",
       "shaders/fragment_shader.glsl")
+
+    @generic_quad = Glove::Quad.new
   end
 
   private def projection_matrix(entities)
@@ -44,11 +46,12 @@ class Glove::Renderer
   private def render(entity : Glove::Entity, matrix : Glove::GLM::Mat4)
     gl_checked(@shader_program.set_uniform_matrix_4f("model", false, matrix))
 
+    texture_id = texture_id_for(entity)
     gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id_for(entity)))
 
-    if polygon = entity.polygon
-      gl_checked(LibGL.bind_vertex_array(polygon.vertex_array_id))
-      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, polygon.vertices.size))
+    if texture_id > 0
+      gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
+      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, @generic_quad.vertices.size))
       gl_checked(LibGL.bind_vertex_array(0))
     end
 
