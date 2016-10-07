@@ -6,7 +6,6 @@
 # - EventHandlers::MouseButton (to get mouse up/down events)
 
 class Glove::Entity
-  property :texture
   property :polygon
   property :components
   property :mouse_event_handler
@@ -15,7 +14,6 @@ class Glove::Entity
   getter :children
   property :z
 
-  @texture : Glove::Texture?
   @polygon : Glove::Quad? # TODO: rename Quad to Polygon… or so.
   @mouse_event_handler : Glove::EventHandler? # FIXME
   @keyboard_event_handler : Glove::EventHandler? # FIXME
@@ -26,6 +24,15 @@ class Glove::Entity
     @children = [] of Glove::Entity
     @z = 0
     @dead = false
+  end
+
+  # TODO: remove
+  def texture=(new_texture)
+    if com = self[Glove::Components::Texture]?
+      com.texture = new_texture
+    else
+      self << Glove::Components::Texture.new(new_texture)
+    end
   end
 
   def <<(component)

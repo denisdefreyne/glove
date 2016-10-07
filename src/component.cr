@@ -59,4 +59,5 @@ end
 
 require "./components/camera"
 require "./components/cursor_tracking"
+require "./components/texture"
 require "./components/transform"
