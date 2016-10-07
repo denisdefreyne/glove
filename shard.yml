@@ -6,5 +6,10 @@ authors:
 
 license: MIT
 
+dependencies:
+  spec2:
+    github: waterlink/spec2.cr
+    branch: master
+
 scripts:
   postinstall: cd ext && make

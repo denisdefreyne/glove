@@ -1,0 +1,6 @@
+version: 1.0
+shards:
+  spec2:
+    github: waterlink/spec2.cr
+    commit: eef5144d86f3aadf95811ffc0450be389db36fed
+
