@@ -71,11 +71,7 @@ class Glove::Renderer
 
   private def texture_id_for(entity : Glove::Entity)
     if texture_component = entity[Glove::Components::Texture]?
-      if texture = texture_component.texture
-        texture.texture_id
-      else
-        0
-      end
+      texture_component.texture.texture_id
     else
       0
     end
