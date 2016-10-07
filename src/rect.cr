@@ -17,6 +17,14 @@ struct Glove::Rect
     )
   end
 
+  def width
+    @size.width
+  end
+
+  def height
+    @size.height
+  end
+
   def left
     @origin.x
   end
