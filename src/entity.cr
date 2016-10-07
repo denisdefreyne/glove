@@ -6,7 +6,6 @@
 # - EventHandlers::MouseButton (to get mouse up/down events)
 
 class Glove::Entity
-  property :components
   property :mouse_event_handler
   property :keyboard_event_handler
   property? :dead
@@ -17,7 +16,6 @@ class Glove::Entity
   @keyboard_event_handler : Glove::EventHandler? # FIXME
 
   def initialize
-    @components = [] of Glove::Component
     @components_by_name = {} of Symbol => Glove::Component
     @children = [] of Glove::Entity
     @z = 0
@@ -33,8 +31,11 @@ class Glove::Entity
     end
   end
 
+  def components
+    @components_by_name.values
+  end
+
   def <<(component)
-    @components << component
     @components_by_name[component.class.sym] = component
   end
 
@@ -47,7 +48,6 @@ class Glove::Entity
   end
 
   def delete_component(sym : Symbol)
-    @components.reject! { |c| c.class.sym == sym }
     @components_by_name.delete(sym)
   end
 
