@@ -47,7 +47,7 @@ class Glove::Renderer
     gl_checked(@shader_program.set_uniform_matrix_4f("model", false, matrix))
 
     texture_id = texture_id_for(entity)
-    gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id_for(entity)))
+    gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
 
     if texture_id > 0
       gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
