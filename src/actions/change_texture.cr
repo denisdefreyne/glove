@@ -4,6 +4,6 @@ class Glove::Actions::ChangeTexture < Glove::InstantAction
   end
 
   def update(delta_time)
-    @entity.texture = @texture_path
+    @entity << Glove::Components::Texture.new(@texture_path)
   end
 end

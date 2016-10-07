@@ -22,15 +22,6 @@ class Glove::Entity
     @dead = false
   end
 
-  # TODO: remove
-  def texture=(new_texture)
-    if com = self[Glove::Components::Texture]?
-      com.texture = new_texture
-    else
-      self << Glove::Components::Texture.new(new_texture)
-    end
-  end
-
   def components
     @components_by_name.values
   end
