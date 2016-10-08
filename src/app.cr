@@ -102,10 +102,11 @@ abstract class Glove::App
     LibGLFW.set_input_mode(@window, LibGLFW::CURSOR, LibGLFW::CURSOR_DISABLED)
 
     LibGL.enable(LibGL::MULTISAMPLE)
+
     LibGL.enable(LibGL::BLEND)
-    LibGL.enable(LibGL::DEPTH_TEST)
     LibGL.blend_func(LibGL::SRC_ALPHA, LibGL::ONE_MINUS_SRC_ALPHA);
 
+    LibGL.enable(LibGL::DEPTH_TEST)
     LibGL.depth_func(LibGL::LESS)
   end
 
