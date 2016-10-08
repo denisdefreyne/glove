@@ -10,7 +10,6 @@ class Glove::Entity
   property :keyboard_event_handler
   property? :dead
   getter :children
-  property :z
 
   @mouse_event_handler : Glove::EventHandler? # FIXME
   @keyboard_event_handler : Glove::EventHandler? # FIXME
@@ -24,6 +23,20 @@ class Glove::Entity
 
   def components
     @components_by_name.values
+  end
+
+  # TODO: remove
+  def z
+    if z_component = self[Glove::Components::Z]?
+      z_component.z
+    else
+      0.0
+    end
+  end
+
+  # TODO: remove
+  def z=(new_z)
+    self << Glove::Components::Z.new(new_z)
   end
 
   def <<(component)
