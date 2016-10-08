@@ -1,5 +1,5 @@
 class Glove::Actions::ChangeZ < Glove::InstantAction
-  def initialize(@entity : Glove::Entity, @new_z : Int32)
+  def initialize(@entity : Glove::Entity, @new_z : Float32)
     super()
   end
 

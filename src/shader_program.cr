@@ -64,6 +64,11 @@ class Glove::ShaderProgram
     LibGL.uniform_1i(location, v0)
   end
 
+  def set_uniform_1f(name, v0)
+    location = get_uniform_location_cached(name)
+    LibGL.uniform_1f(location, v0)
+  end
+
   def set_uniform_4f(name, v0, v1, v2, v3)
     location = get_uniform_location_cached(name)
     LibGL.uniform_4f(location, v0, v1, v2, v3)

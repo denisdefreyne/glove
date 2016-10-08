@@ -190,5 +190,6 @@ lib LibGL
   fun get_uniform_location = glGetUniformLocation(program : Uint, name : Char*) : Int
   fun uniform_matrix_4fv = glUniformMatrix4fv(location : Int, count : Sizei, transpose : Boolean, value : Float*) : Void
   fun uniform_1i = glUniform1i(location : Int, value : Int) : Void
+  fun uniform_1f = glUniform1f(location : Int, value : Float) : Void
   fun uniform_4f = glUniform4f(location : Int, v0 : Float, v1 : Float, v2 : Float, v3 : Float) : Void
 end

@@ -60,6 +60,8 @@ class Glove::Renderer
     is_renderable = texture_id > 0 || color
 
     if is_renderable
+      gl_checked(@shader_program.set_uniform_1f("z", entity.z / 100.0))
+
       gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
       gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, @generic_quad.vertices.size))
       gl_checked(LibGL.bind_vertex_array(0))

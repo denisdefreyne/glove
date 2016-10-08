@@ -18,7 +18,7 @@ class Glove::Entity
   def initialize
     @components_by_name = {} of Symbol => Glove::Component
     @children = [] of Glove::Entity
-    @z = 0
+    @z = 0.0_f32
     @dead = false
   end
 
