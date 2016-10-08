@@ -34,9 +34,7 @@ class Glove::Renderer
     @shader_program.use
     gl_checked(@shader_program.set_uniform_matrix_4f("projection", false, projection_matrix(entities)))
 
-    # TODO: remove sorting
-    sorted_entities = entities.unwrap.sort_by { |e| z_for(e) }
-    sorted_entities.each { |e| render(e) }
+    entities.each { |e| render(e) }
   end
 
   private def render(entity : Glove::Entity)
