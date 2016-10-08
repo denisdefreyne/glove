@@ -59,7 +59,7 @@ class Glove::Renderer
     is_renderable = texture_id > 0 || color
 
     if is_renderable
-      gl_checked(@shader_program.set_uniform_1f("z", z_for(entity) / 100.0))
+      gl_checked(@shader_program.set_uniform_1f("z", z_for(entity)))
 
       gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
       gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, @generic_quad.vertices.size))
@@ -98,7 +98,7 @@ class Glove::Renderer
 
   private def z_for(entity : Glove::Entity)
     if z_component = entity[Glove::Components::Z]?
-      z_component.z
+      - z_component.z / 100.0_f32
     else
       0.0
     end
