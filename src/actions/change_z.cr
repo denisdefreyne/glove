@@ -4,6 +4,6 @@ class Glove::Actions::ChangeZ < Glove::InstantAction
   end
 
   def update(delta_time)
-    @entity.z = @new_z
+    @entity << Glove::Components::Z.new(@new_z)
   end
 end

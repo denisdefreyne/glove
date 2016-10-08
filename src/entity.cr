@@ -25,20 +25,6 @@ class Glove::Entity
     @components_by_name.values
   end
 
-  # TODO: remove
-  def z
-    if z_component = self[Glove::Components::Z]?
-      z_component.z
-    else
-      0.0
-    end
-  end
-
-  # TODO: remove
-  def z=(new_z)
-    self << Glove::Components::Z.new(new_z)
-  end
-
   def <<(component)
     @components_by_name[component.class.sym] = component
   end
