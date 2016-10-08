@@ -4,9 +4,13 @@ in vec2 TexCoords;
 out vec4 color;
 
 uniform sampler2D image;
-uniform vec3 spriteColor;
+uniform vec4 spriteColor;
+uniform int textured;
 
 void main()
 {
-    color = texture(image, TexCoords);
+    if (textured == 0)
+        color = spriteColor;
+    else
+        color = texture(image, TexCoords);
 }

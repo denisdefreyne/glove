@@ -47,9 +47,19 @@ class Glove::Renderer
     gl_checked(@shader_program.set_uniform_matrix_4f("model", false, matrix))
 
     texture_id = texture_id_for(entity)
-    gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
+    color = color_for(entity)
 
     if texture_id > 0
+      gl_checked(@shader_program.set_uniform_1i("textured", 1))
+      gl_checked(@shader_program.set_uniform_4f("spriteColor", 0.0, 1.0, 0.5, 0.5))
+      gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
+    elsif color
+      gl_checked(@shader_program.set_uniform_1i("textured", 0))
+      gl_checked(@shader_program.set_uniform_4f("spriteColor", color.r, color.g, color.b, color.a))
+    end
+    is_renderable = texture_id > 0 || color
+
+    if is_renderable
       gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
       gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, @generic_quad.vertices.size))
       gl_checked(LibGL.bind_vertex_array(0))
@@ -74,6 +84,14 @@ class Glove::Renderer
       texture_component.texture.texture_id
     else
       0
+    end
+  end
+
+  private def color_for(entity : Glove::Entity)
+    if color_component = entity[Glove::Components::Color]?
+      color_component.color
+    else
+      nil
     end
   end
 end

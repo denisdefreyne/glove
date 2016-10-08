@@ -35,7 +35,7 @@ class Glove::Shader
       LibGL.get_shader_info_log @shader_id, info_log_length, nil, buffer
       {info_log_length, info_log_length}
     end
-    raise "Error compiling shader: #{info_log}" unless result
+    raise "Error compiling shader: #{info_log}" unless result > 0
 
     self
   end

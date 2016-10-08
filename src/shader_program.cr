@@ -55,7 +55,17 @@ class Glove::ShaderProgram
   end
 
   def set_uniform_matrix_4f(name, transpose, data)
-    location =get_uniform_location_cached(name)
-    LibGL.uniform_matrix_4fv location, 1, GL.to_boolean(transpose), data
+    location = get_uniform_location_cached(name)
+    LibGL.uniform_matrix_4fv(location, 1, GL.to_boolean(transpose), data)
+  end
+
+  def set_uniform_1i(name, v0)
+    location = get_uniform_location_cached(name)
+    LibGL.uniform_1i(location, v0)
+  end
+
+  def set_uniform_4f(name, v0, v1, v2, v3)
+    location = get_uniform_location_cached(name)
+    LibGL.uniform_4f(location, v0, v1, v2, v3)
   end
 end
