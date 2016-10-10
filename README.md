@@ -4,6 +4,37 @@
 
 A [Crystal](https://crystal-lang.org/) library for making games.
 
+## Example code
+
+Here is a trivial example that renders a card (from `assets/card.png`):
+
+```crystal
+require "glove"
+
+card =
+  Glove::Entity.new.tap do |e|
+    e << Glove::Components::Texture.new("assets/card.png")
+    e << Glove::Components::Transform.new.tap do |t|
+      t.width = 140_f32
+      t.height = 190_f32
+      t.translate_x = 400_f32
+      t.translate_y = 300_f32
+    end
+  end
+
+scene =
+  Glove::Scene.new.tap do |scene|
+    scene.spaces << Glove::Space.new.tap do |space|
+      space.entities << card
+    end
+  end
+
+game = Glove::EntityApp.new(800, 600, "Inari")
+game.clear_color = Glove::Color::WHITE
+game.replace_scene(scene)
+game.run
+```
+
 ## Architecture
 
 * `Glove::EntityApp` is a generic game superclass that provides functionality for handling entities, and everything associated with it. Here is how a typical game would build an instance and run the game:
