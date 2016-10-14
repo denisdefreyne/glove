@@ -1,8 +1,8 @@
 # Glove
 
-**Status:** Experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
+Glove is a framework for making games. It is implemented in [Crystal](https://crystal-lang.org/).
 
-A [Crystal](https://crystal-lang.org/) library for making games.
+**Caution!** Glove is experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
 
 ## Example code
 
