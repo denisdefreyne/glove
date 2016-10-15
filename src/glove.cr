@@ -13,6 +13,7 @@ require "./color"
 
 # other
 require "./app"
+require "./system"
 require "./texture"
 require "./quad"
 require "./component"

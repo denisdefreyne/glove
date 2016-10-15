@@ -59,6 +59,8 @@ game.run
 
 * `Glove::Scene` describes a scene (such as the main menu, credits, or in-game screen). It contains one or more spaces.
 
+* `Glove::System` describes logic for making changes to a space. A common system is a physics system, which would calculate velocities and update positions.
+
 There are also a handful of simple data classes:
 
 * `Glove::Color`

@@ -1,16 +1,20 @@
 class Glove::Space
   getter :entities
   getter :actions
+  getter :systems
 
   def initialize
     @entities = Glove::EntityCollection.new
     @actions = [] of Glove::Action
+    @systems = [] of Glove::System
   end
 
   def update(delta_time, app)
     # FIXME: also update child entities
     entities.each { |e| e.update(delta_time, self, app) }
     entities.remove_dead
+
+    systems.each { |s| s.update(delta_time, self, app) }
 
     actions.each { |a| a.update_wrapped(delta_time) }
     actions.reject! { |a| a.done? }
