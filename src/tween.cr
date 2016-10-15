@@ -1,9 +1,12 @@
 class Glove::Tween
-  def initialize(@duration : Float32)
-    @time_spent = 0_f32
+  enum Kind
+    Linear
+    EaseIn
+    EaseOut
+  end
 
-    # TODO: pass in type
-    @type = :ease_out
+  def initialize(@duration : Float32, @kind : Kind)
+    @time_spent = 0_f32
   end
 
   def linear_fraction
@@ -14,18 +17,17 @@ class Glove::Tween
   def fraction
     lf = linear_fraction
 
-    case @type
-      # TODO: add other types
-    when :linear
+    case @kind
+    when Kind::Linear
       lf
-    when :ease_in
+    when Kind::EaseIn
       lf * lf * lf
-    when :ease_out
+    when Kind::EaseOut
       lf_inv = lf - 1_f32
       lf_inv * lf_inv * lf_inv + 1_f32
-    else
-      lf
     end
+
+    # TODO: add more types
   end
 
   def complete?
