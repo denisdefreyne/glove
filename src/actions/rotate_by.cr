@@ -1,7 +1,7 @@
 class Glove::Actions::RotateBy < Glove::IntervalAction
-  def initialize(@entity : Glove::Entity, angle_diff : Float32, duration : Float32)
+  def initialize(@entity : Glove::Entity, angle_diff : Float32, duration : Float32, tween_kind : Glove::Tween::Kind)
     super(duration)
-    @tween = Glove::Tween.new(duration)
+    @tween = Glove::Tween.new(duration, tween_kind)
 
     @angle_diff = angle_diff
 

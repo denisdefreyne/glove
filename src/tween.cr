@@ -25,6 +25,8 @@ class Glove::Tween
     when Kind::EaseOut
       lf_inv = lf - 1_f32
       lf_inv * lf_inv * lf_inv + 1_f32
+    else
+      0_f32
     end
 
     # TODO: add more types

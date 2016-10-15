@@ -1,6 +1,6 @@
 class Glove::Actions::ChangeColor < Glove::IntervalAction
-  def initialize(@entity : Glove::Entity, @new_color : Glove::Color, duration : Float32)
-    @tween = Glove::Tween.new(duration)
+  def initialize(@entity : Glove::Entity, @new_color : Glove::Color, duration : Float32, tween_kind : Glove::Tween::Kind)
+    @tween = Glove::Tween.new(duration, tween_kind)
 
     if color_component = @entity[Glove::Components::Color]?
       @original_color = color_component.color
