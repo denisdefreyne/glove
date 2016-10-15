@@ -29,7 +29,7 @@ class Glove::Tween
       1_f32 - calc(1_f32 - lf, Kind::EaseIn)
     when Kind::EaseInOut
       if lf < 0.5
-        calc(lf * 2.0, Kind::EaseIn) / 2.0
+        calc(lf * 2, Kind::EaseIn) / 2
       else
         1 - calc((1 - lf) * 2, Kind::EaseIn) / 2
       end
