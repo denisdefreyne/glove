@@ -39,6 +39,11 @@ Spec2.describe Glove::Tween do
       let(kind) { Glove::Tween::Kind::EaseOut }
       it "" { expect(subject.fraction).to eq(0.875) }
     end
+
+    context "ease in out" do
+      let(kind) { Glove::Tween::Kind::EaseInOut }
+      it "" { expect(subject.fraction).to eq(0.5) }
+    end
   end
 
   context "at end" do

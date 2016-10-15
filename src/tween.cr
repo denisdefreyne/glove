@@ -3,6 +3,7 @@ class Glove::Tween
     Linear
     EaseIn
     EaseOut
+    EaseInOut
   end
 
   def initialize(@duration : Float32, @kind : Kind)
@@ -15,21 +16,27 @@ class Glove::Tween
   end
 
   def fraction
-    lf = linear_fraction
+    calc(linear_fraction, @kind)
+  end
 
-    case @kind
+  private def calc(lf, kind : Kind)
+    case kind
     when Kind::Linear
       lf
     when Kind::EaseIn
       lf * lf * lf
     when Kind::EaseOut
-      lf_inv = lf - 1_f32
-      lf_inv * lf_inv * lf_inv + 1_f32
+      1_f32 - calc(1_f32 - lf, Kind::EaseIn)
+    when Kind::EaseInOut
+      if lf < 0.5
+        calc(lf * 2.0, Kind::EaseIn) / 2.0
+      else
+        1 - calc((1 - lf) * 2, Kind::EaseIn) / 2
+      end
     else
+      # TODO: add more types
       0_f32
     end
-
-    # TODO: add more types
   end
 
   def complete?
