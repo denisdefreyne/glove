@@ -11,6 +11,7 @@ end
 require "./actions/interval"
 require "./actions/instant"
 
+require "./actions/change_color"
 require "./actions/change_texture"
 require "./actions/change_z"
 require "./actions/delay"

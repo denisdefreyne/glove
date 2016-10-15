@@ -22,6 +22,7 @@ class Glove::Actions::MoveBy < Glove::IntervalAction
   end
 
   def update(delta_time)
+    # FIXME: this fails the last update
     @tween.update(delta_time)
     return if @tween.complete?
 
