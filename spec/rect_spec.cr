@@ -21,12 +21,26 @@ Spec2.describe Glove::Rect do
     expect(subject.bottom).to eq(200)
   end
 
-  describe "grow" do
+  describe "#grow" do
     subject { super.grow(1_f32) }
 
     it "grows properly" do
       expect(subject.left).to eq(99)
       expect(subject.right).to eq(401)
+      expect(subject.top).to eq(601)
+      expect(subject.bottom).to eq(199)
+    end
+  end
+
+  describe "#grow_y" do
+    subject { super.grow_y(1_f32) }
+
+    it "keeps left/right unchanged" do
+      expect(subject.left).to eq(100)
+      expect(subject.right).to eq(400)
+    end
+
+    it "grows properly" do
       expect(subject.top).to eq(601)
       expect(subject.bottom).to eq(199)
     end

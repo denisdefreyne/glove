@@ -17,6 +17,13 @@ struct Glove::Rect
     )
   end
 
+  def grow_y(size : Float32)
+    Rect.new(
+      Point.new(@origin.x, @origin.y - size),
+      Size.new(@size.width, @size.height + 2 * size),
+    )
+  end
+
   def width
     @size.width
   end
