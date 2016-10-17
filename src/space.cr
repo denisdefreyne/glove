@@ -10,14 +10,18 @@ class Glove::Space
   end
 
   def update(delta_time, app)
-    # FIXME: also update child entities
-    entities.each { |e| e.update(delta_time, self, app) }
+    entities.each { |e| update_entity(e, delta_time, app) }
     entities.remove_dead
 
     systems.each { |s| s.update(delta_time, self, app) }
 
     actions.each { |a| a.update_wrapped(delta_time) }
     actions.reject! { |a| a.done? }
+  end
+
+  private def update_entity(entity : Glove::Entity, delta_time, app)
+    entity.update(delta_time, self, app)
+    entity.children.each { |c| update_entity(c, delta_time, app) }
   end
 
   # TODO: return false if unhandled, true if it is

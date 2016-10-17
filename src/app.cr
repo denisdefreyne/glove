@@ -3,10 +3,21 @@ require "./glew"
 require "./gl"
 require "./metrics"
 
-abstract class Glove::App
+abstract class Glove::AbstractApp
   abstract def update(delta_time)
   abstract def render(delta_time)
+  abstract def quit
 
+  def initialize(@width : Int32, @height : Int32, @title : String)
+  end
+
+  abstract def handle_event(event : Glove::Event)
+  abstract def cursor_position
+  abstract def key_pressed?(key)
+  abstract def run
+end
+
+abstract class Glove::App < Glove::AbstractApp
   def cleanup
   end
 
