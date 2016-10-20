@@ -9,7 +9,9 @@ class Glove::Components::Transform < Glove::Component
   property :anchor_x
   property :anchor_y
 
+  # TODO: cache
   @model_matrix : Glove::GLM::TMat4(Float32)
+  @child_model_matrix : Glove::GLM::TMat4(Float32)
 
   def initialize
     @width = 0_f32
@@ -23,6 +25,7 @@ class Glove::Components::Transform < Glove::Component
     @anchor_y = 0.5_f32
 
     @model_matrix = Glove::GLM::Mat4.identity
+    @child_model_matrix = Glove::GLM::Mat4.identity
   end
 
   def matrix
@@ -33,6 +36,16 @@ class Glove::Components::Transform < Glove::Component
     Glove::GLM.translate(@model_matrix, -@anchor_x, -@anchor_y)
 
     @model_matrix
+  end
+
+  def matrix_for_child
+    Glove::GLM.identity(@child_model_matrix)
+    Glove::GLM.translate(@child_model_matrix, @translate_x, @translate_y)
+    Glove::GLM.rotate_z(@child_model_matrix, @angle)
+    Glove::GLM.scale(@child_model_matrix, @scale_x, @scale_y)
+    Glove::GLM.translate(@child_model_matrix, -@anchor_x, -@anchor_y)
+
+    @child_model_matrix
   end
 
   def bounds

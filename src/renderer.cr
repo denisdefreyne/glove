@@ -67,15 +67,24 @@ class Glove::Renderer
       gl_checked(LibGL.bind_vertex_array(0))
     end
 
+    parent_matrix = transform_matrix_as_parent(entity)
     entity.children.each do |child_entity|
       child_matrix = transform_matrix_for(child_entity)
-      render(child_entity, matrix * child_matrix)
+      render(child_entity, parent_matrix * child_matrix)
     end
   end
 
   private def transform_matrix_for(entity : Glove::Entity)
     if transform = entity[Glove::Components::Transform]?
       transform.matrix
+    else
+      NULL_TRANSFORM
+    end
+  end
+
+  private def transform_matrix_as_parent(entity : Glove::Entity)
+    if transform = entity[Glove::Components::Transform]?
+      transform.matrix_for_child
     else
       NULL_TRANSFORM
     end
