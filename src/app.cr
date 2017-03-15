@@ -148,7 +148,6 @@ abstract class Glove::App < Glove::AbstractApp
     loop do
       sleep 0
       @metrics.inc(:glove_frames_total)
-      @metrics.set(:glove_gc_collections, GC.stats.collections)
 
       LibGLFW.poll_events
 

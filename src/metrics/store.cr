@@ -6,7 +6,6 @@ class Glove::Metrics::Store
     # TODO: extract
     @counters[:glove_frames_total] = 0.0
     @gauges[:glove_entities_total] = 0.0
-    @gauges[:glove_gc_collections] = 0.0
   end
 
   def inc(name : Symbol)
