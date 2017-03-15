@@ -12,4 +12,4 @@ dependencies:
     branch: master
 
 scripts:
-  postinstall: cd ext && make
+  postinstall: cd src/ext && make
