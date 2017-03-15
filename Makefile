@@ -6,9 +6,9 @@ HEADER_END=$(SP)\x1b[0m
 default: spec
 
 .PHONY: deps
-deps: libs
+deps: lib
 
-libs: shard.yml
+lib: shard.yml
 	@echo "$(HEADER_START)Installing dependencies…$(HEADER_END)"
 	crystal deps
 	mkdir -p `dirname $@`
@@ -22,7 +22,7 @@ clean:
 	rm -rf tmp
 	rm -rf build
 	rm -rf .shards
-	rm -rf libs
+	rm -rf lib
 	@echo
 
 .PHONY: spec
