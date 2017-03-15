@@ -38,4 +38,7 @@ module Glove::Key
   KEY_X     = 88
   KEY_Y     = 89
   KEY_Z     = 90
+
+  KEY_RIGHT = 262
+  KEY_LEFT  = 263
 end
