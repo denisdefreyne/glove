@@ -1,4 +1,6 @@
-@[Link(framework: "OpenGL")] ifdef darwin
+{% if flag?(:darwin) %}
+  @[Link(framework: "OpenGL")]
+{% end %}
 lib LibGL
   alias Enum = UInt32     # unsigned int
   alias Boolean = UInt8   # unsigned char
