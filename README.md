@@ -8,7 +8,7 @@ Glove is a framework for making games. It is implemented in [Crystal](https://cr
 
 To use this shard, add the following lines to your `shard.yml`:
 
-```
+```yaml
 dependencies:
   glove:
     git: git@github.com:ddfreyne/glove.git
