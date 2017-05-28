@@ -4,7 +4,7 @@ Glove is a framework for making games. It is implemented in [Crystal](https://cr
 
 **Caution!** Glove is experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
 
-## Installation
+## Usage
 
 To use this shard, add the following lines to your `shard.yml`:
 
@@ -12,6 +12,29 @@ To use this shard, add the following lines to your `shard.yml`:
 dependencies:
   glove:
     git: git@github.com:ddfreyne/glove.git
+```
+
+Glove comes with shaders in its `shaders/` directory; this directory needs to be copied to whereever your game is run from. For example, the following will create a `target/` directory that contains the executable and the shaders directory:
+
+```bash
+rm -rf target/
+mkdir -p target
+
+crystal build -o target/mygame src/mygame.cr
+
+cp -r lib/glove/src/shaders target/shaders
+```
+
+The `target/` directory should also include any assets that the game needs to run; a more complete build script could therefore look as follows:
+
+```bash
+rm -rf target/
+mkdir -p target
+
+crystal build -o target/mygame src/mygame.cr
+
+cp -r lib/glove/src/shaders target/shaders
+cp -r assets target/assets # <- added
 ```
 
 ## Example code
