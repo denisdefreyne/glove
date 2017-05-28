@@ -1,3 +1,4 @@
 .crystal
 /lib
 /.shards
+*.a
