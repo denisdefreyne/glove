@@ -2,5 +2,5 @@ version: 1.0
 shards:
   spec2:
     github: waterlink/spec2.cr
-    commit: 2854573e169d6f82478f9bbd316f382fb54010ae
+    commit: f3d8aca8165d8a6ec7681b4355b5ee8b1d597a68
 
