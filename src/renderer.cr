@@ -51,12 +51,18 @@ class Glove::Renderer
 
     if texture_id > 0
       gl_checked(@shader_program.set_uniform_1i("textured", 1))
-      gl_checked(@shader_program.set_uniform_4f("spriteColor", 0.0, 1.0, 0.5, 0.5))
+      gl_checked(@shader_program.set_uniform_4f("spriteColor", 1.0, 1.0, 1.0, 1.0))
       gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
-    elsif color
+    else
       gl_checked(@shader_program.set_uniform_1i("textured", 0))
-      gl_checked(@shader_program.set_uniform_4f("spriteColor", color.r, color.g, color.b, color.a))
     end
+
+    if color
+      gl_checked(@shader_program.set_uniform_4f("spriteColor", color.r, color.g, color.b, color.a))
+    else
+      gl_checked(@shader_program.set_uniform_4f("spriteColor", 1.0, 1.0, 1.0, 1.0))
+    end
+
     is_renderable = texture_id > 0 || color
 
     if is_renderable

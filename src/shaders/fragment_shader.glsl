@@ -12,5 +12,5 @@ void main()
     if (textured == 0)
         color = spriteColor;
     else
-        color = texture(image, TexCoords);
+        color = texture(image, TexCoords) * spriteColor;
 }
