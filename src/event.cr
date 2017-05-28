@@ -10,6 +10,10 @@ class Glove::Events::Key < Glove::Event
   def initialize(@direction : Symbol, @key : Int32)
   end
 
+  def repeat?
+    @direction == :repeat
+  end
+
   def pressed?
     @direction == :down
   end
