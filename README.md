@@ -4,6 +4,16 @@ Glove is a framework for making games. It is implemented in [Crystal](https://cr
 
 **Caution!** Glove is experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
 
+## Installation
+
+To use this shard add the following lines to your shard.yml  
+   
+```
+dependencies:
+  glove:
+    git: git@github.com:ddfreyne/glove.git
+```
+
 ## Example code
 
 Here is a trivial example that renders a card (from `assets/card.png`):
