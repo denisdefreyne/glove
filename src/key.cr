@@ -41,4 +41,6 @@ module Glove::Key
 
   KEY_RIGHT = 262
   KEY_LEFT  = 263
+  KEY_DOWN  = 264
+  KEY_UP    = 265
 end
