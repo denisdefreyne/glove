@@ -60,6 +60,7 @@ end
 require "./components/camera"
 require "./components/color"
 require "./components/cursor_tracking"
+require "./components/parallax"
 require "./components/texture"
 require "./components/transform"
 require "./components/z"

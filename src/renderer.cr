@@ -11,19 +11,17 @@ class Glove::Renderer
     @generic_quad = Glove::Quad.new
   end
 
-  private def projection_matrix(entities)
+  private def projection_matrix(entities : Glove::EntityCollection, camera : Glove::Entity?)
     projection_matrix = Glove::GLM::Mat4.identity
     Glove::GLM.translate(projection_matrix, -1.0_f32, -1.0_f32)
     Glove::GLM.scale(projection_matrix, 2.0_f32/@width, 2.0_f32/@height)
 
-    if cameras = entities.all_with_component(Glove::Components::Camera)
-      if camera = cameras[0]?
-        if transform = camera[Glove::Components::Transform]?
-          Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
-          Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
-          Glove::GLM.rotate_z(projection_matrix, transform.angle)
-          Glove::GLM.translate(projection_matrix, -transform.translate_x, -transform.translate_y)
-        end
+    if camera
+      if transform = camera[Glove::Components::Transform]?
+        Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
+        Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
+        Glove::GLM.rotate_z(projection_matrix, transform.angle)
+        Glove::GLM.translate(projection_matrix, -transform.translate_x, -transform.translate_y)
       end
     end
 
@@ -31,19 +29,21 @@ class Glove::Renderer
   end
 
   def render(entities : Glove::EntityCollection)
+    camera = camera_or_nil(entities)
+
     @shader_program.use
-    gl_checked(@shader_program.set_uniform_matrix_4f("projection", false, projection_matrix(entities)))
+    gl_checked(@shader_program.set_uniform_matrix_4f("projection", false, projection_matrix(entities, camera)))
 
     sorted_entities = entities.unwrap.sort_by { |e| - z_for(e) }
-    sorted_entities.each { |e| render(e) }
+    sorted_entities.each { |e| render(e, camera) }
   end
 
-  private def render(entity : Glove::Entity)
-    matrix = transform_matrix_for(entity)
-    render(entity, matrix)
+  private def render(entity : Glove::Entity, camera : Glove::Entity?)
+    matrix = transform_matrix_for(entity, camera)
+    render(entity, matrix, camera)
   end
 
-  private def render(entity : Glove::Entity, matrix : Glove::GLM::Mat4)
+  private def render(entity : Glove::Entity, matrix : Glove::GLM::Mat4, camera : Glove::Entity?)
     gl_checked(@shader_program.set_uniform_matrix_4f("model", false, matrix))
 
     texture_id = texture_id_for(entity)
@@ -69,14 +69,27 @@ class Glove::Renderer
 
     parent_matrix = transform_matrix_as_parent(entity)
     entity.children.each do |child_entity|
-      child_matrix = transform_matrix_for(child_entity)
-      render(child_entity, parent_matrix * child_matrix)
+      child_matrix = transform_matrix_for(child_entity, camera)
+      render(child_entity, parent_matrix * child_matrix, camera)
     end
   end
 
-  private def transform_matrix_for(entity : Glove::Entity)
+  private def transform_matrix_for(entity : Glove::Entity, camera : Glove::Entity?)
     if transform = entity[Glove::Components::Transform]?
-      transform.matrix
+      if camera
+        pf = parallax_for(entity)
+        ct = camera[Glove::Components::Transform]?
+        if pf != 1.0 && ct
+          transform.dup.tap do |t|
+            t.translate_x = t.translate_x * pf + ct.translate_x * (1.0 - pf)
+            t.translate_y = t.translate_y * pf + ct.translate_y * (1.0 - pf)
+          end.matrix
+        else
+          transform.matrix
+        end
+      else
+        transform.matrix
+      end
     else
       NULL_TRANSFORM
     end
@@ -104,6 +117,19 @@ class Glove::Renderer
     else
       nil
     end
+  end
+
+  private def parallax_for(entity : Glove::Entity)
+    if parallax_component = entity[Glove::Components::Parallax]?
+      parallax_component.factor
+    else
+      1.0
+    end
+  end
+
+  private def camera_or_nil(entities : Glove::EntityCollection)
+    cameras = entities.all_with_component(Glove::Components::Camera)
+    cameras[0]?
   end
 
   private def z_for(entity : Glove::Entity)

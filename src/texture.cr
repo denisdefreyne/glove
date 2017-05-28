@@ -1,5 +1,7 @@
 class Glove::Texture
   getter :texture_id
+  getter :width
+  getter :height
 
   def self.from(filename : String)
     LibGL.gen_textures(1, out texture_id)
@@ -34,9 +36,9 @@ class Glove::Texture
     LibSTBImage.free(data)
     gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, 0))
 
-    new(texture_id)
+    new(texture_id, width, height)
   end
 
-  def initialize(@texture_id : UInt32)
+  def initialize(@texture_id : UInt32, @width : Int32, @height : Int32)
   end
 end
