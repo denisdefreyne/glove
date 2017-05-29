@@ -52,6 +52,10 @@ Here is a trivial example that renders a card (from `assets/card.png`):
 ```crystal
 require "glove"
 
+if full_path = Process.executable_path
+  Dir.cd(File.dirname(full_path))
+end
+
 card =
   Glove::Entity.new.tap do |e|
     e << Glove::Components::Texture.new("assets/card.png")
