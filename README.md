@@ -25,6 +25,14 @@ crystal build -o target/mygame src/mygame.cr
 cp -r lib/glove/src/shaders target/shaders
 ```
 
+It is useful to have the executable `cd` to the directory it is located in, before doing anything else, so that it can find the shaders easily:
+
+```crystal
+if full_path = Process.executable_path
+  Dir.cd(File.dirname(full_path))
+end
+```
+
 The `target/` directory should also include any assets that the game needs to run; a more complete build script could therefore look as follows:
 
 ```bash
