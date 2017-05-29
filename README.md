@@ -14,7 +14,7 @@ dependencies:
     git: git@github.com:ddfreyne/glove.git
 ```
 
-Glove comes with shaders in its `shaders/` directory; this directory needs to be copied to whereever your game is run from. For example, the following will create a `target/` directory that contains the executable and the shaders directory:
+Glove comes with shaders in its `shaders/` directory, which needs to be copied to where the executable is located. For example, the following will create a `target/` directory that contains the executable and the shaders directory:
 
 ```bash
 rm -rf target/
@@ -25,7 +25,7 @@ crystal build -o target/mygame src/mygame.cr
 cp -r lib/glove/src/shaders target/shaders
 ```
 
-It is useful to have the executable `cd` to the directory it is located in, before doing anything else, so that it can find the shaders easily:
+It is useful to let the executable `cd` to the directory it is located in, before doing anything else, so that it can find the shaders easily:
 
 ```crystal
 if full_path = Process.executable_path
