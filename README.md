@@ -2,7 +2,7 @@
 
 Glove is a framework for making games. It is implemented in [Crystal](https://crystal-lang.org/).
 
-**Caution!** Glove is experimental. Expect many breaking changes. There are no tests. Do not use this for your own projects.
+**⚠ Caution! ⚠** Glove is experimental. Expect breaking changes. There are few tests. Do not use this for your own projects (yet).
 
 ## Usage
 
