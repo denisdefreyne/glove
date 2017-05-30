@@ -21,8 +21,14 @@ clean:
 	rm -rf lib
 	@echo
 
+.PHONY: ext
+ext:
+	@echo "*** Building ext…"
+	make -C src/ext
+	@echo
+
 .PHONY: spec
-spec: deps
+spec: deps ext
 	@echo "*** Testing…"
 	crystal spec
 	@echo

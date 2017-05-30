@@ -1,5 +1,6 @@
 libstb_image.a: stb_image.o
-	libtool -static $< -o $@
+	rm -f $@
+	ar -rcs $@ $<
 
 .INTERMEDIATE: stb_image.o
 stb_image.o: stb_image.c stb_image.h
