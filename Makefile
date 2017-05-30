@@ -11,16 +11,6 @@ lib: shard.yml
 	touch $@
 	@echo
 
-.PHONY: clean
-clean:
-	@echo "*** Cleaning…"
-	rm -rf .crystal
-	rm -rf tmp
-	rm -rf build
-	rm -rf .shards
-	rm -rf lib
-	@echo
-
 .PHONY: ext
 ext:
 	@echo "*** Building ext…"
