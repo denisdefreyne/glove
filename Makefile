@@ -1,7 +1,3 @@
-SP=" "
-HEADER_START=\x1b[46;30m$(SP)
-HEADER_END=$(SP)\x1b[0m
-
 .PHONY: default
 default: spec
 
@@ -9,7 +5,7 @@ default: spec
 deps: lib
 
 lib: shard.yml
-	@echo "$(HEADER_START)Installing dependencies…$(HEADER_END)"
+	@echo "*** Installing dependencies…"
 	crystal deps
 	mkdir -p `dirname $@`
 	touch $@
@@ -17,7 +13,7 @@ lib: shard.yml
 
 .PHONY: clean
 clean:
-	@echo "$(HEADER_START)Cleaning…$(HEADER_END)"
+	@echo "*** Cleaning…"
 	rm -rf .crystal
 	rm -rf tmp
 	rm -rf build
@@ -27,6 +23,6 @@ clean:
 
 .PHONY: spec
 spec: deps
-	@echo "$(HEADER_START)Testing…$(HEADER_END)"
+	@echo "*** Testing…"
 	crystal spec
 	@echo
