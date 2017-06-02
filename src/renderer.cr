@@ -7,8 +7,10 @@ class Glove::Renderer
     @shader_program = ShaderProgram.from(
       "shaders/vertex_shader.glsl",
       "shaders/fragment_shader.glsl")
+  end
 
-    @generic_quad = Glove::Quad.new
+  def self.generic_quad
+    @@_generic_quad ||= Glove::Quad.new
   end
 
   private def projection_matrix(entities : Glove::EntityCollection, camera : Glove::Entity?)
@@ -68,8 +70,9 @@ class Glove::Renderer
     if is_renderable
       gl_checked(@shader_program.set_uniform_1f("z", z_for(entity)))
 
-      gl_checked(LibGL.bind_vertex_array(@generic_quad.vertex_array_id))
-      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, @generic_quad.vertices.size))
+      quad = quad_for(entity)
+      gl_checked(LibGL.bind_vertex_array(quad.vertex_array_id))
+      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, quad.vertices.size))
       gl_checked(LibGL.bind_vertex_array(0))
     end
 
@@ -114,6 +117,14 @@ class Glove::Renderer
       texture_component.texture.texture_id
     else
       0
+    end
+  end
+
+  private def quad_for(entity : Glove::Entity)
+    if texture_component = entity[Glove::Components::Texture]?
+      texture_component.quad
+    else
+      self.class.generic_quad
     end
   end
 
