@@ -4,4 +4,8 @@ struct Glove::Vector
 
   def initialize(@dx : Float32, @dy : Float32)
   end
+
+  def +(other : Glove::Vector)
+    self.class.new(dx + other.dx, dy + other.dy)
+  end
 end
