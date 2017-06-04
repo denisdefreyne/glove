@@ -29,7 +29,7 @@ Spec2.describe Glove::Vector do
 
     let(other) { Glove::Vector.new(other_dx, other_dy) }
 
-    it "adds" do
+    it "subtracts" do
       expect(subject.dx).to eq(90)
       expect(subject.dy).to eq(180)
     end
@@ -40,7 +40,18 @@ Spec2.describe Glove::Vector do
 
     let(other) { 0.1 }
 
-    it "adds" do
+    it "multiplies" do
+      expect(subject.dx).to eq(10)
+      expect(subject.dy).to eq(20)
+    end
+  end
+
+  describe "#* - scalar divide" do
+    subject { super / other }
+
+    let(other) { 10 }
+
+    it "divides" do
       expect(subject.dx).to eq(10)
       expect(subject.dy).to eq(20)
     end
