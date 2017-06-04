@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "command": "make",
+    "isShellCommand": true,
+    "tasks": [
+        {
+            "isBuildCommand": true,
+            "taskName": "spec",
+            "args": [
+                "spec"
+            ]
+        }
+    ],
+    "showOutput": "always"
+}
