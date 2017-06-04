@@ -34,4 +34,15 @@ Spec2.describe Glove::Vector do
       expect(subject.dy).to eq(180)
     end
   end
+
+  describe "#* - scalar multiply" do
+    subject { super * other }
+
+    let(other) { 0.1 }
+
+    it "adds" do
+      expect(subject.dx).to eq(10)
+      expect(subject.dy).to eq(20)
+    end
+  end
 end

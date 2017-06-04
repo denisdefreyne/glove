@@ -12,4 +12,8 @@ struct Glove::Vector
   def -(other : Glove::Vector)
     self.class.new(dx - other.dx, dy - other.dy)
   end
+
+  def *(other)
+    self.class.new(dx * other, dy * other)
+  end
 end
