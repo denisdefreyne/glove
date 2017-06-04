@@ -7,7 +7,7 @@ Spec2.describe Glove::Vector do
   let(dx) { 100_f32 }
   let(dy) { 200_f32 }
 
-  describe "#+" do
+  describe "#+ - add" do
     subject { super + other }
 
     let(other_dx) { 10_f32 }
@@ -18,6 +18,20 @@ Spec2.describe Glove::Vector do
     it "adds" do
       expect(subject.dx).to eq(110)
       expect(subject.dy).to eq(220)
+    end
+  end
+
+  describe "#- - subtract" do
+    subject { super - other }
+
+    let(other_dx) { 10_f32 }
+    let(other_dy) { 20_f32 }
+
+    let(other) { Glove::Vector.new(other_dx, other_dy) }
+
+    it "adds" do
+      expect(subject.dx).to eq(90)
+      expect(subject.dy).to eq(180)
     end
   end
 end

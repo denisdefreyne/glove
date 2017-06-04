@@ -8,4 +8,8 @@ struct Glove::Vector
   def +(other : Glove::Vector)
     self.class.new(dx + other.dx, dy + other.dy)
   end
+
+  def -(other : Glove::Vector)
+    self.class.new(dx - other.dx, dy - other.dy)
+  end
 end
