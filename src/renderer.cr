@@ -86,12 +86,15 @@ class Glove::Renderer
   private def transform_matrix_for(entity : Glove::Entity, camera : Glove::Entity?)
     if transform = entity[Glove::Components::Transform]?
       if camera
-        pf = parallax_for(entity)
-        ct = camera[Glove::Components::Transform]?
-        if pf != 1.0 && ct
+        parallax_component = entity[Glove::Components::Parallax]?
+        camera_transform = camera[Glove::Components::Transform]?
+        if parallax_component && camera_transform
+          pf = parallax_component.factor
+          dx = camera_transform.translate_x + parallax_component.offset_x
+          dy = camera_transform.translate_y + parallax_component.offset_y
           transform.dup.tap do |t|
-            t.translate_x = t.translate_x * pf + ct.translate_x * (1.0 - pf)
-            t.translate_y = t.translate_y * pf + ct.translate_y * (1.0 - pf)
+            t.translate_x = t.translate_x * pf + dx * (1.0 - pf)
+            t.translate_y = t.translate_y * pf + dy * (1.0 - pf)
           end.matrix
         else
           transform.matrix
