@@ -3,6 +3,7 @@ struct Float32
   def self.zero
     0_f32
   end
+
   def self.one
     1_f32
   end
@@ -12,6 +13,7 @@ struct Float64
   def self.zero
     0_f64
   end
+
   def self.one
     1_f64
   end
@@ -198,9 +200,9 @@ module Glove::GLM
     mat[2, 0] = tmp_20 * cos + tmp_21 * sin
     mat[3, 0] = tmp_30 * cos + tmp_31 * sin
 
-    mat[0, 1] = - tmp_00 * sin + tmp_01 * cos
-    mat[1, 1] = - tmp_10 * sin + tmp_11 * cos
-    mat[2, 1] = - tmp_20 * sin + tmp_21 * cos
-    mat[3, 1] = - tmp_30 * sin + tmp_31 * cos
+    mat[0, 1] = -tmp_00 * sin + tmp_01 * cos
+    mat[1, 1] = -tmp_10 * sin + tmp_11 * cos
+    mat[2, 1] = -tmp_20 * sin + tmp_21 * cos
+    mat[3, 1] = -tmp_30 * sin + tmp_31 * cos
   end
 end

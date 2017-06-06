@@ -115,7 +115,7 @@ abstract class Glove::App < Glove::AbstractApp
     LibGL.enable(LibGL::MULTISAMPLE)
 
     LibGL.enable(LibGL::BLEND)
-    LibGL.blend_func(LibGL::SRC_ALPHA, LibGL::ONE_MINUS_SRC_ALPHA);
+    LibGL.blend_func(LibGL::SRC_ALPHA, LibGL::ONE_MINUS_SRC_ALPHA)
 
     LibGL.enable(LibGL::DEPTH_TEST)
     LibGL.depth_func(LibGL::LESS)

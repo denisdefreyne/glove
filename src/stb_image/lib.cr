@@ -9,9 +9,9 @@ lib LibSTBImage
 
   fun free = stbi_image_free(data : UInt8*)
 
-   DEFAULT    = 0
-   GREY       = 1
-   GREY_ALPHA = 2
-   RGB        = 3
-   RGB_ALPHA  = 4
+  DEFAULT    = 0
+  GREY       = 1
+  GREY_ALPHA = 2
+  RGB        = 3
+  RGB_ALPHA  = 4
 end

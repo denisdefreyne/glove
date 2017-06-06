@@ -15,18 +15,18 @@ lib LibGL
   alias Float = Float32   # float
   alias Clampf = Float32  # float
 
-  alias Char = UInt8      # char
+  alias Char = UInt8 # char
 
-  alias Sizeiptr = Int32  # long
+  alias Sizeiptr = Int32 # long
 
   TRUE  = 1_u8
   FALSE = 0_u8
 
   # ??
   MULTISAMPLE = 0x809D
-  BLEND_DST = 0x0BE0
-  BLEND_SRC = 0x0BE1
-  BLEND     = 0x0BE2
+  BLEND_DST   = 0x0BE0
+  BLEND_SRC   = 0x0BE1
+  BLEND       = 0x0BE2
 
   SRC_COLOR           = 0x0300
   ONE_MINUS_SRC_COLOR = 0x0301
@@ -39,14 +39,14 @@ lib LibGL
   SRC_ALPHA_SATURATE  = 0x0308
 
   # DataType
-  BYTE            = 0x1400_u32
-  UNSIGNED_BYTE   = 0x1401_u32
-  SHORT           = 0x1402_u32
-  UNSIGNED_SHORT  = 0x1403_u32
-  INT             = 0x1404_u32
-  UNSIGNED_INT    = 0x1405_u32
-  FLOAT           = 0x1406_u32
-  DOUBLE          = 0x140A_u32
+  BYTE           = 0x1400_u32
+  UNSIGNED_BYTE  = 0x1401_u32
+  SHORT          = 0x1402_u32
+  UNSIGNED_SHORT = 0x1403_u32
+  INT            = 0x1404_u32
+  UNSIGNED_INT   = 0x1405_u32
+  FLOAT          = 0x1406_u32
+  DOUBLE         = 0x140A_u32
 
   # AttribMask
   DEPTH_BUFFER_BIT   = 0x00000100_u32
@@ -74,7 +74,7 @@ lib LibGL
   QUADS          = 0x0007_u32
 
   # ErrorCode
-  NO_ERROR          = 0_u32
+  NO_ERROR          =      0_u32
   INVALID_ENUM      = 0x0500_u32
   INVALID_VALUE     = 0x0501_u32
   INVALID_OPERATION = 0x0502_u32
@@ -136,7 +136,7 @@ lib LibGL
   NUM_EXTENSIONS = 0x821D_u32
 
   # Utility functions
-  fun get_error = glGetError() : Enum
+  fun get_error = glGetError : Enum
 
   fun get_string = glGetString(name : Enum) : Ubyte*
   fun get_stringi = glGetStringi(name : Enum, index : Uint) : Ubyte*
@@ -180,7 +180,7 @@ lib LibGL
   fun get_shader_iv = glGetShaderiv(shader : Uint, pname : Enum, params : Int*) : Void
   fun get_shader_info_log = glGetShaderInfoLog(shader : Uint, buf_size : Sizei, length : Sizei*, info_log : Char*) : Void
 
-  fun create_program = glCreateProgram() : Uint
+  fun create_program = glCreateProgram : Uint
   fun attach_shader = glAttachShader(program : Uint, shader : Uint) : Void
   fun link_program = glLinkProgram(program : Uint) : Void
 

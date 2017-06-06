@@ -28,54 +28,54 @@ lib LibGLFW
   PRESS   = 1
   REPEAT  = 2
 
-  KEY_SPACE         = 32
-  KEY_APOSTROPHE    = 39
-  KEY_COMMA         = 44
-  KEY_MINUS         = 45
-  KEY_PERIOD        = 46
-  KEY_SLASH         = 47
-  KEY_0             = 48
-  KEY_1             = 49
-  KEY_2             = 50
-  KEY_3             = 51
-  KEY_4             = 52
-  KEY_5             = 53
-  KEY_6             = 54
-  KEY_7             = 55
-  KEY_8             = 56
-  KEY_9             = 57
-  KEY_SEMICOLON     = 59
-  KEY_EQUAL         = 61
-  KEY_A             = 65
-  KEY_B             = 66
-  KEY_C             = 67
-  KEY_D             = 68
-  KEY_E             = 69
-  KEY_F             = 70
-  KEY_G             = 71
-  KEY_H             = 72
-  KEY_I             = 73
-  KEY_J             = 74
-  KEY_K             = 75
-  KEY_L             = 76
-  KEY_M             = 77
-  KEY_N             = 78
-  KEY_O             = 79
-  KEY_P             = 80
-  KEY_Q             = 81
-  KEY_R             = 82
-  KEY_S             = 83
-  KEY_T             = 84
-  KEY_U             = 85
-  KEY_V             = 86
-  KEY_W             = 87
-  KEY_X             = 88
-  KEY_Y             = 89
-  KEY_Z             = 90
-  KEY_LEFT_BRACKET  = 91
-  KEY_BACKSLASH     = 92
-  KEY_RIGHT_BRACKET = 93
-  KEY_GRAVE_ACCENT  = 96
+  KEY_SPACE         =  32
+  KEY_APOSTROPHE    =  39
+  KEY_COMMA         =  44
+  KEY_MINUS         =  45
+  KEY_PERIOD        =  46
+  KEY_SLASH         =  47
+  KEY_0             =  48
+  KEY_1             =  49
+  KEY_2             =  50
+  KEY_3             =  51
+  KEY_4             =  52
+  KEY_5             =  53
+  KEY_6             =  54
+  KEY_7             =  55
+  KEY_8             =  56
+  KEY_9             =  57
+  KEY_SEMICOLON     =  59
+  KEY_EQUAL         =  61
+  KEY_A             =  65
+  KEY_B             =  66
+  KEY_C             =  67
+  KEY_D             =  68
+  KEY_E             =  69
+  KEY_F             =  70
+  KEY_G             =  71
+  KEY_H             =  72
+  KEY_I             =  73
+  KEY_J             =  74
+  KEY_K             =  75
+  KEY_L             =  76
+  KEY_M             =  77
+  KEY_N             =  78
+  KEY_O             =  79
+  KEY_P             =  80
+  KEY_Q             =  81
+  KEY_R             =  82
+  KEY_S             =  83
+  KEY_T             =  84
+  KEY_U             =  85
+  KEY_V             =  86
+  KEY_W             =  87
+  KEY_X             =  88
+  KEY_Y             =  89
+  KEY_Z             =  90
+  KEY_LEFT_BRACKET  =  91
+  KEY_BACKSLASH     =  92
+  KEY_RIGHT_BRACKET =  93
+  KEY_GRAVE_ACCENT  =  96
   KEY_WORLD_1       = 161
   KEY_WORLD_2       = 162
 
@@ -152,30 +152,30 @@ lib LibGLFW
   KEY_LAST          = KEY_MENU
 
   fun set_error_callback = glfwSetErrorCallback(
-    callback : ErrorCallback) : ErrorCallback
+                                                callback : ErrorCallback) : ErrorCallback
   fun set_key_callback = glfwSetKeyCallback(
-    window : Window, callback : KeyCallback) : KeyCallback
+                                            window : Window, callback : KeyCallback) : KeyCallback
   fun set_mouse_button_callback = glfwSetMouseButtonCallback(
-    window : Window, callback : MouseButtonCallback) : MouseButtonCallback
+                                                             window : Window, callback : MouseButtonCallback) : MouseButtonCallback
   fun set_scroll_callback = glfwSetScrollCallback(
-    window : Window, callback : ScrollCallback) : ScrollCallback
+                                                  window : Window, callback : ScrollCallback) : ScrollCallback
 
   fun set_window_user_pointer = glfwSetWindowUserPointer(
-    window : Window, pointer : Void*) : Void
+                                                         window : Window, pointer : Void*) : Void
   fun get_window_user_pointer = glfwGetWindowUserPointer(
-    window : Window) : Void*
+                                                         window : Window) : Void*
 
-  fun init = glfwInit() : Int32
+  fun init = glfwInit : Int32
   fun window_hint = glfwWindowHint(target : Int32, hint : Int32) : Void
-  fun terminate = glfwTerminate() : Void
+  fun terminate = glfwTerminate : Void
 
   fun create_window = glfwCreateWindow(width : Int32, height : Int32, title : UInt8*, monitor : Monitor, share : Window) : Window
   fun set_current_context = glfwMakeContextCurrent(window : Window) : Void
-  fun get_current_context = glfwGetCurrentContext() : Window
+  fun get_current_context = glfwGetCurrentContext : Window
 
   fun set_input_mode = glfwSetInputMode(window : Window, mode : Int32, value : Int32) : Void
   fun swap_buffers = glfwSwapBuffers(window : Window) : Void
-  fun poll_events = glfwPollEvents() : Void
+  fun poll_events = glfwPollEvents : Void
   fun get_key = glfwGetKey(window : Window, key : Int32) : Int32
   fun window_should_close = glfwWindowShouldClose(window : Window) : Int32
   fun set_window_should_close = glfwSetWindowShouldClose(window : Window, value : Int32) : Void
@@ -183,5 +183,5 @@ lib LibGLFW
   fun get_cursor_pos = glfwGetCursorPos(window : Window, xpos : Float64*, ypos : Float64*) : Void
   fun set_cursor_pos = glfwSetCursorPos(window : Window, xpos : Float64, ypos : Float64) : Void
 
-  fun get_time = glfwGetTime() : Float64
+  fun get_time = glfwGetTime : Float64
 end
