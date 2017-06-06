@@ -17,6 +17,13 @@ ext:
 	make -C src/ext
 	@echo
 
+.PHONY: doc
+doc:
+	@echo "*** Building documentation…"
+	crystal docs
+	mv doc docs
+	@echo
+
 .PHONY: spec
 spec: deps ext
 	@echo "*** Testing…"
