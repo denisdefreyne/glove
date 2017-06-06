@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta id="repository-name" content="github.com/ddfreyne/glove">
+  <link href="../css/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../js/doc.js"></script>
+  <title>Glove::Shader - github.com/ddfreyne/glove</title>
+</head>
+<body>
+
+<div id="types-list">
+  <div id="search-box">
+    <input type="search" id="search-input" placeholder="Search...">
+  </div>
+
+  <ul>
+    <li><a href="../index.html">README</a></li>
+  </ul>
+
+  <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Float32" data-name="float32">
+      <a href="../Float32.html">Float32</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Float64" data-name="float64">
+      <a href="../Float64.html">Float64</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="github.com/ddfreyne/glove/Glove" data-name="glove">
+      <a href="../Glove.html">Glove</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/AbstractApp" data-name="glove::abstractapp">
+      <a href="../Glove/AbstractApp.html">AbstractApp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Action" data-name="glove::action">
+      <a href="../Glove/Action.html">Action</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/Actions" data-name="glove::actions">
+      <a href="../Glove/Actions.html">Actions</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/ChangeColor" data-name="glove::actions::changecolor">
+      <a href="../Glove/Actions/ChangeColor.html">ChangeColor</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/ChangeTexture" data-name="glove::actions::changetexture">
+      <a href="../Glove/Actions/ChangeTexture.html">ChangeTexture</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/ChangeZ" data-name="glove::actions::changez">
+      <a href="../Glove/Actions/ChangeZ.html">ChangeZ</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/Delay" data-name="glove::actions::delay">
+      <a href="../Glove/Actions/Delay.html">Delay</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/Kill" data-name="glove::actions::kill">
+      <a href="../Glove/Actions/Kill.html">Kill</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/MoveBy" data-name="glove::actions::moveby">
+      <a href="../Glove/Actions/MoveBy.html">MoveBy</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/ReplaceScene" data-name="glove::actions::replacescene">
+      <a href="../Glove/Actions/ReplaceScene.html">ReplaceScene</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/RotateBy" data-name="glove::actions::rotateby">
+      <a href="../Glove/Actions/RotateBy.html">RotateBy</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/ScaleTo" data-name="glove::actions::scaleto">
+      <a href="../Glove/Actions/ScaleTo.html">ScaleTo</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/Sequence" data-name="glove::actions::sequence">
+      <a href="../Glove/Actions/Sequence.html">Sequence</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Actions/Spawn" data-name="glove::actions::spawn">
+      <a href="../Glove/Actions/Spawn.html">Spawn</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/App" data-name="glove::app">
+      <a href="../Glove/App.html">App</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/AssetManager" data-name="glove::assetmanager">
+      <a href="../Glove/AssetManager.html">AssetManager</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Color" data-name="glove::color">
+      <a href="../Glove/Color.html">Color</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Component" data-name="glove::component">
+      <a href="../Glove/Component.html">Component</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/Components" data-name="glove::components">
+      <a href="../Glove/Components.html">Components</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Camera" data-name="glove::components::camera">
+      <a href="../Glove/Components/Camera.html">Camera</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Color" data-name="glove::components::color">
+      <a href="../Glove/Components/Color.html">Color</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/CursorTracking" data-name="glove::components::cursortracking">
+      <a href="../Glove/Components/CursorTracking.html">CursorTracking</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Parallax" data-name="glove::components::parallax">
+      <a href="../Glove/Components/Parallax.html">Parallax</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Texture" data-name="glove::components::texture">
+      <a href="../Glove/Components/Texture.html">Texture</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Transform" data-name="glove::components::transform">
+      <a href="../Glove/Components/Transform.html">Transform</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Components/Z" data-name="glove::components::z">
+      <a href="../Glove/Components/Z.html">Z</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Cursor" data-name="glove::cursor">
+      <a href="../Glove/Cursor.html">Cursor</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Entity" data-name="glove::entity">
+      <a href="../Glove/Entity.html">Entity</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/EntityApp" data-name="glove::entityapp">
+      <a href="../Glove/EntityApp.html">EntityApp</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/EntityCollection" data-name="glove::entitycollection">
+      <a href="../Glove/EntityCollection.html">EntityCollection</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Event" data-name="glove::event">
+      <a href="../Glove/Event.html">Event</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/EventHandler" data-name="glove::eventhandler">
+      <a href="../Glove/EventHandler.html">EventHandler</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/EventQueue" data-name="glove::eventqueue">
+      <a href="../Glove/EventQueue.html">EventQueue</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/Events" data-name="glove::events">
+      <a href="../Glove/Events.html">Events</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/CursorEntered" data-name="glove::events::cursorentered">
+      <a href="../Glove/Events/CursorEntered.html">CursorEntered</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/CursorExited" data-name="glove::events::cursorexited">
+      <a href="../Glove/Events/CursorExited.html">CursorExited</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/Key" data-name="glove::events::key">
+      <a href="../Glove/Events/Key.html">Key</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/MousePressed" data-name="glove::events::mousepressed">
+      <a href="../Glove/Events/MousePressed.html">MousePressed</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/MouseReleased" data-name="glove::events::mousereleased">
+      <a href="../Glove/Events/MouseReleased.html">MouseReleased</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Events/Scrolled" data-name="glove::events::scrolled">
+      <a href="../Glove/Events/Scrolled.html">Scrolled</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/GL" data-name="glove::gl">
+      <a href="../Glove/GL.html">GL</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/GLM" data-name="glove::glm">
+      <a href="../Glove/GLM.html">GLM</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/GLM/Mat4" data-name="glove::glm::mat4">
+      <a href="../Glove/GLM/Mat4.html">Mat4</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/GLM/TMat4" data-name="glove::glm::tmat4(t)">
+      <a href="../Glove/GLM/TMat4.html">TMat4</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/InstantAction" data-name="glove::instantaction">
+      <a href="../Glove/InstantAction.html">InstantAction</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/IntervalAction" data-name="glove::intervalaction">
+      <a href="../Glove/IntervalAction.html">IntervalAction</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Key" data-name="glove::key">
+      <a href="../Glove/Key.html">Key</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/Metrics" data-name="glove::metrics">
+      <a href="../Glove/Metrics.html">Metrics</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Metrics/Server" data-name="glove::metrics::server">
+      <a href="../Glove/Metrics/Server.html">Server</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Metrics/Store" data-name="glove::metrics::store">
+      <a href="../Glove/Metrics/Store.html">Store</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Point" data-name="glove::point">
+      <a href="../Glove/Point.html">Point</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Quad" data-name="glove::quad">
+      <a href="../Glove/Quad.html">Quad</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Rect" data-name="glove::rect">
+      <a href="../Glove/Rect.html">Rect</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Renderer" data-name="glove::renderer">
+      <a href="../Glove/Renderer.html">Renderer</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Scene" data-name="glove::scene">
+      <a href="../Glove/Scene.html">Scene</a>
+      
+    </li>
+  
+  <li class=" current" data-id="github.com/ddfreyne/glove/Glove/Shader" data-name="glove::shader">
+      <a href="../Glove/Shader.html">Shader</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/ShaderProgram" data-name="glove::shaderprogram">
+      <a href="../Glove/ShaderProgram.html">ShaderProgram</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Size" data-name="glove::size">
+      <a href="../Glove/Size.html">Size</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Space" data-name="glove::space">
+      <a href="../Glove/Space.html">Space</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/System" data-name="glove::system">
+      <a href="../Glove/System.html">System</a>
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Texture" data-name="glove::texture">
+      <a href="../Glove/Texture.html">Texture</a>
+      
+    </li>
+  
+  <li class="parent " data-id="github.com/ddfreyne/glove/Glove/Tween" data-name="glove::tween">
+      <a href="../Glove/Tween.html">Tween</a>
+      
+        <ul>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Tween/Kind" data-name="glove::tween::kind">
+      <a href="../Glove/Tween/Kind.html">Kind</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="github.com/ddfreyne/glove/Glove/Vector" data-name="glove::vector">
+      <a href="../Glove/Vector.html">Vector</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+</div>
+
+<div id="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Glove::Shader
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Glove/Shader.html">Glove::Shader</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>Defined in:</h2>
+  
+    
+      <a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L1" target="_blank">shader.cr</a>
+    
+    <br/>
+  
+
+
+
+
+
+  <h2>Class Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#fragment%28source%3Dnil%29-class-method" class="signature"><strong>.fragment</strong>(source = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28type%3AUInt32%29-class-method" class="signature"><strong>.new</strong>(type : UInt32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#vertex%28source%3Dnil%29-class-method" class="signature"><strong>.vertex</strong>(source = <span class="n">nil</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <h2>Instance Method Summary</h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#compile-instance-method" class="signature"><strong>#compile</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete-instance-method" class="signature"><strong>#delete</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shader_id%3AUInt32-instance-method" class="signature"><strong>#shader_id</strong> : UInt32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_source%28source%3AString%29-instance-method" class="signature"><strong>#with_source</strong>(source : String)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+  
+</div>
+
+
+  <h2>Class Method Detail</h2>
+  
+    <div class="entry-detail" id="fragment&#40;source&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>fragment</strong>(source = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#fragment%28source%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new&#40;type:UInt32&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(type : UInt32)
+
+        <a class="method-permalink" href="#new%28type%3AUInt32%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="vertex&#40;source&#61;nil&#41;-class-method">
+      <div class="signature">
+        
+        def self.<strong>vertex</strong>(source = <span class="n">nil</span>)
+
+        <a class="method-permalink" href="#vertex%28source%3Dnil%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L2" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+  <h2>Instance Method Detail</h2>
+  
+    <div class="entry-detail" id="compile-instance-method">
+      <div class="signature">
+        
+        def <strong>compile</strong>
+
+        <a class="method-permalink" href="#compile-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>
+
+        <a class="method-permalink" href="#delete-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L43" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shader_id:UInt32-instance-method">
+      <div class="signature">
+        
+        def <strong>shader_id</strong> : UInt32
+
+        <a class="method-permalink" href="#shader_id%3AUInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_source&#40;source:String&#41;-instance-method">
+      <div class="signature">
+        
+        def <strong>with_source</strong>(source : String)
+
+        <a class="method-permalink" href="#with_source%28source%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/ddfreyne/glove/blob/e92ffd7ef0e147dc53cff84e5d934f960a542110/src/shader.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+</div>
+
+</body>
+</html>
