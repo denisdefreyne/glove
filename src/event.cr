@@ -45,6 +45,14 @@ class Glove::Events::Scrolled < Glove::Event
   end
 end
 
+class Glove::Events::Moved < Glove::Event
+  getter :dx
+  getter :dy
+
+  def initialize(@dx : Float64, @dy : Float64)
+  end
+end
+
 class Glove::Events::CursorEntered < Glove::Event
 end
 
