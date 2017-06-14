@@ -4,9 +4,11 @@ class Glove::Renderer
   @shader_program : Glove::ShaderProgram
 
   def initialize(@width : Int32, @height : Int32)
+    vertex_shader = {{ `cat #{__DIR__}/shaders/vertex_shader.glsl`.stringify }}
+    fragment_shader = {{ `cat #{__DIR__}/shaders/fragment_shader.glsl`.stringify }}
     @shader_program = ShaderProgram.from(
-      "shaders/vertex_shader.glsl",
-      "shaders/fragment_shader.glsl")
+      IO::Memory.new(vertex_shader),
+      IO::Memory.new(fragment_shader))
   end
 
   def self.generic_quad
