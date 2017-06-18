@@ -6,7 +6,7 @@ struct Glove::Point
   end
 
   def +(other : Glove::Vector)
-    self.class.new(x + other.dx, y + other.dy)
+    Glove::Point.new(x + other.dx, y + other.dy)
   end
 
   def -(other : Glove::Point)
