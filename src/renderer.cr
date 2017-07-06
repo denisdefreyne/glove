@@ -72,7 +72,7 @@ class Glove::Renderer
 
       quad = quad_for(entity)
       gl_checked(LibGL.bind_vertex_array(quad.vertex_array_id))
-      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLES, 0, quad.vertices.size))
+      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLE_STRIP, 0, quad.vertices.size))
       gl_checked(LibGL.bind_vertex_array(0))
     end
 

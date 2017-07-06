@@ -13,9 +13,6 @@ class Glove::Quad
       [
         0_f32, 0_f32,       0_f32,         texture_height,
         0_f32, height,      0_f32,         0_f32,
-        width, height,      texture_width, 0_f32,
-
-        0_f32, 0_f32,       0_f32,         texture_height,
         width, 0_f32,       texture_width, texture_height,
         width, height,      texture_width, 0_f32,
       ]
