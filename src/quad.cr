@@ -8,13 +8,21 @@ class Glove::Quad
     initialize(1_f32, 1_f32)
   end
 
-  def initialize(width : Float32, height : Float32, texture_width : Float32 = 1f32, texture_height : Float32 = 1f32)
+  def initialize(width : Float32, height : Float32)
+    initialize(width, height, 1_f32, 1_f32)
+  end
+
+  def initialize(width : Float32, height : Float32, texture_width : Float32, texture_height : Float32)
+    initialize(width, height, texture_width, texture_height, 0_f32, 0_f32)
+  end
+
+  def initialize(width : Float32, height : Float32, texture_width : Float32, texture_height : Float32, offset_x : Float32, offset_y : Float32)
     @vertices =
       [
-        0_f32, 0_f32,       0_f32,         texture_height,
-        0_f32, height,      0_f32,         0_f32,
-        width, 0_f32,       texture_width, texture_height,
-        width, height,      texture_width, 0_f32,
+        0_f32, 0_f32,   texture_width * offset_x, texture_height,
+        0_f32, height,  texture_width * offset_x, texture_height * offset_y,
+        width, 0_f32,   texture_width,            texture_height,
+        width, height,  texture_width,            texture_height * offset_y,
       ]
 
     LibGL.gen_buffers(1, out vertex_buffer)
