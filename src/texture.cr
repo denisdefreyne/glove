@@ -18,13 +18,13 @@ class Glove::Texture
         raise "Cannot convert comp #{comp}"
       end
 
-    gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
-    gl_checked(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MIN_FILTER, LibGL::LINEAR))
-    gl_checked(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MAG_FILTER, LibGL::LINEAR))
-    gl_checked(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_S, LibGL::REPEAT))
-    gl_checked(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_T, LibGL::REPEAT))
+    gl_checked_void(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
+    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MIN_FILTER, LibGL::LINEAR))
+    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MAG_FILTER, LibGL::LINEAR))
+    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_S, LibGL::REPEAT))
+    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_T, LibGL::REPEAT))
 
-    gl_checked(LibGL.tex_image_2d(
+    gl_checked_void(LibGL.tex_image_2d(
       LibGL::TEXTURE_2D,
       0,
       image_type,
@@ -36,7 +36,7 @@ class Glove::Texture
       data.as(Void*)))
 
     LibSTBImage.free(data)
-    gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, 0))
+    gl_checked_void(LibGL.bind_texture(LibGL::TEXTURE_2D, 0))
 
     new(texture_id, width, height)
   end
