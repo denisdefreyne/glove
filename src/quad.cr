@@ -29,7 +29,7 @@ class Glove::Quad
     LibGL.gen_vertex_arrays(1, out my_vertex_array_id)
 
     # VAO
-    gl_checked(LibGL.bind_vertex_array(my_vertex_array_id))
+    gl_checked_void(LibGL.bind_vertex_array(my_vertex_array_id))
 
     # VBO
     LibGL.bind_buffer(LibGL::ARRAY_BUFFER, vertex_buffer)
@@ -47,7 +47,7 @@ class Glove::Quad
     LibGL.vertex_attrib_pointer(0_u32, 2, LibGL::FLOAT, LibGL::FALSE, stride, nil)
     LibGL.vertex_attrib_pointer(1_u32, 2, LibGL::FLOAT, LibGL::FALSE, stride, offset)
 
-    gl_checked(LibGL.bind_vertex_array(0))
+    gl_checked_void(LibGL.bind_vertex_array(0))
 
     @vertex_array_id = my_vertex_array_id
   end

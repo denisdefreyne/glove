@@ -56,7 +56,7 @@ class Glove::Renderer
     if texture_id > 0
       gl_checked(@shader_program.set_uniform_1i("textured", 1))
       gl_checked(@shader_program.set_uniform_4f("spriteColor", 1.0, 1.0, 1.0, 1.0))
-      gl_checked(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
+      gl_checked_void(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
     else
       gl_checked(@shader_program.set_uniform_1i("textured", 0))
     end
@@ -73,9 +73,9 @@ class Glove::Renderer
       gl_checked(@shader_program.set_uniform_1f("z", z_for(entity)))
 
       quad = quad_for(entity)
-      gl_checked(LibGL.bind_vertex_array(quad.vertex_array_id))
-      gl_checked(LibGL.draw_arrays(LibGL::TRIANGLE_STRIP, 0, quad.vertices.size))
-      gl_checked(LibGL.bind_vertex_array(0))
+      gl_checked_void(LibGL.bind_vertex_array(quad.vertex_array_id))
+      gl_checked_void(LibGL.draw_arrays(LibGL::TRIANGLE_STRIP, 0, quad.vertices.size))
+      gl_checked_void(LibGL.bind_vertex_array(0))
     end
 
     parent_matrix = transform_matrix_as_parent(entity)

@@ -10,6 +10,16 @@ macro gl_checked(call)
   value
 end
 
+macro gl_checked_void(call)
+  {{call}}
+  error = LibGL.get_error
+  if error != LibGL::NO_ERROR
+    details = "#{error} / #{GL.error_to_s(error)}"
+    raise "OpenGL call failed: " + {{call.stringify}} + ": #{details}"
+  end
+  nil
+end
+
 module Glove::GL
   def self.check_error(where="")
     if error = GL.last_error
