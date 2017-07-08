@@ -175,6 +175,7 @@ lib LibGLFW
   fun create_window = glfwCreateWindow(width : Int32, height : Int32, title : UInt8*, monitor : Monitor, share : Window) : Window
   fun set_current_context = glfwMakeContextCurrent(window : Window) : Void
   fun get_current_context = glfwGetCurrentContext : Window
+  fun set_title = glfwSetWindowTitle(window : Window, title : UInt8*)
 
   fun set_input_mode = glfwSetInputMode(window : Window, mode : Int32, value : Int32) : Void
   fun swap_buffers = glfwSwapBuffers(window : Window) : Void

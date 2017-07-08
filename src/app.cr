@@ -127,6 +127,11 @@ abstract class Glove::App < Glove::AbstractApp
     LibGL.depth_func(LibGL::LESS)
   end
 
+  def title=(title)
+    @title = title
+    LibGLFW.set_title(@window, @title)
+  end
+
   def handle_event(event : Glove::Event)
     # Discard by default
   end
