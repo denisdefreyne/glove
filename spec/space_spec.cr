@@ -1,4 +1,4 @@
-require "spec2"
+require "spec"
 require "../src/glove"
 
 class GloveSpaceSpecTestComponent < ::Glove::Component
@@ -41,53 +41,55 @@ class GloveSpaceSpecTestApp < Glove::AbstractApp
   end
 end
 
-Spec2.describe Glove::Space do
-  let(space) { Glove::Space.new }
-  subject { space }
-
+describe Glove::Space do
   context "new space" do
     it "is empty" do
-      expect(subject.entities.size).to eq(0)
-      expect(subject.actions.size).to eq(0)
-      expect(subject.systems.size).to eq(0)
+      space = Glove::Space.new
+
+      space.entities.size.should eq(0)
+      space.actions.size.should eq(0)
+      space.systems.size.should eq(0)
     end
   end
 
   describe "#update" do
-    subject { space.update(0.123, app) }
-
-    let(app) { GloveSpaceSpecTestApp.new(800, 600, "hello world") }
-
     context "one entity" do
-      before { space.entities << entity }
-
-      let(entity) do
-        Glove::Entity.new.tap do |e|
-          e << GloveSpaceSpecTestComponent.new
-        end
-      end
-
       it "updates" do
-        expect(entity[GloveSpaceSpecTestComponent].updated).to eq(false)
-        subject
-        expect(entity[GloveSpaceSpecTestComponent].updated).to eq(true)
-      end
+        space = Glove::Space.new
+        app = GloveSpaceSpecTestApp.new(800, 600, "hello world")
 
-      context "child entity" do
-        before { entity.children << child_entity }
-
-        let(child_entity) do
+        parent_entity =
           Glove::Entity.new.tap do |e|
             e << GloveSpaceSpecTestComponent.new
           end
-        end
+        space.entities << parent_entity
 
+        parent_entity[GloveSpaceSpecTestComponent].updated.should eq(false)
+        space.update(0.123, app)
+        parent_entity[GloveSpaceSpecTestComponent].updated.should eq(true)
+      end
+
+      context "child entity" do
         it "updates" do
-          expect(entity[GloveSpaceSpecTestComponent].updated).to eq(false)
-          expect(child_entity[GloveSpaceSpecTestComponent].updated).to eq(false)
-          subject
-          expect(entity[GloveSpaceSpecTestComponent].updated).to eq(true)
-          expect(child_entity[GloveSpaceSpecTestComponent].updated).to eq(true)
+          space = Glove::Space.new
+          app = GloveSpaceSpecTestApp.new(800, 600, "hello world")
+
+          parent_entity =
+            Glove::Entity.new.tap do |e|
+              e << GloveSpaceSpecTestComponent.new
+            end
+          child_entity =
+            Glove::Entity.new.tap do |e|
+              e << GloveSpaceSpecTestComponent.new
+            end
+          parent_entity.children << child_entity
+          space.entities << parent_entity
+
+          parent_entity[GloveSpaceSpecTestComponent].updated.should eq(false)
+          child_entity[GloveSpaceSpecTestComponent].updated.should eq(false)
+          space.update(0.123, app)
+          parent_entity[GloveSpaceSpecTestComponent].updated.should eq(true)
+          child_entity[GloveSpaceSpecTestComponent].updated.should eq(true)
         end
       end
     end
