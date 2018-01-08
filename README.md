@@ -1,3 +1,5 @@
+[![Build status](http://img.shields.io/travis/ddfreyne/glove.svg)](https://travis-ci.org/ddfreyne/glove)
+
 # Glove
 
 Glove is a framework for making games. It is implemented in [Crystal](https://crystal-lang.org/).
