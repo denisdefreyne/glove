@@ -1,5 +1,5 @@
 require "spec"
-require "../src/glove"
+require "../../src/glove"
 
 describe Glove::Components::Transform do
   describe "#initialize" do
