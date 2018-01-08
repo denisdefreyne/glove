@@ -1,2 +1,5 @@
 language: crystal
+
 script: make spec
+
+sudo: false
