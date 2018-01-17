@@ -1,9 +1,40 @@
 class Glove::Tween
-  enum Kind
-    Linear
-    EaseIn
-    EaseOut
-    EaseInOut
+  abstract class Kind
+    abstract def calc(lf)
+
+    class Linear < Kind
+      def calc(lf)
+        lf
+      end
+    end
+
+    class EaseIn < Kind
+      def calc(lf)
+        lf * lf * lf
+      end
+    end
+
+    class EaseOut < Kind
+      @@ease_in = EaseIn.new
+      def calc(lf)
+        1_f32 - @@ease_in.calc(1_f32 - lf)
+      end
+    end
+
+    class EaseInOut < Kind
+      @@ease_in = EaseIn.new
+      def calc(lf)
+        if lf < 0.5
+          @@ease_in.calc(lf * 2) / 2
+        else
+          1 - @@ease_in.calc((1 - lf) * 2) / 2
+        end
+      end
+    end
+  end
+
+  def initialize(duration : Float32, kind : Kind.class)
+    initialize(duration, kind.new)
   end
 
   def initialize(@duration : Float32, @kind : Kind)
@@ -16,27 +47,7 @@ class Glove::Tween
   end
 
   def fraction
-    calc(linear_fraction, @kind)
-  end
-
-  private def calc(lf, kind : Kind)
-    case kind
-    when Kind::Linear
-      lf
-    when Kind::EaseIn
-      lf * lf * lf
-    when Kind::EaseOut
-      1_f32 - calc(1_f32 - lf, Kind::EaseIn)
-    when Kind::EaseInOut
-      if lf < 0.5
-        calc(lf * 2, Kind::EaseIn) / 2
-      else
-        1 - calc((1 - lf) * 2, Kind::EaseIn) / 2
-      end
-    else
-      # TODO: add more types
-      0_f32
-    end
+    @kind.calc(linear_fraction)
   end
 
   def complete?

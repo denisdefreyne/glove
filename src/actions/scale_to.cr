@@ -1,5 +1,5 @@
 class Glove::Actions::ScaleTo < Glove::IntervalAction
-  def initialize(@entity : Glove::Entity, @new_scale_x : Float32, @new_scale_y : Float32, duration : Float32, tween_kind : Glove::Tween::Kind)
+  def initialize(@entity : Glove::Entity, @new_scale_x : Float32, @new_scale_y : Float32, duration : Float32, tween_kind : Glove::Tween::Kind.class)
     super(duration)
     @tween = Glove::Tween.new(duration, tween_kind)
 

@@ -1,6 +1,12 @@
 require "spec"
 require "../src/glove"
 
+class Rounded < Glove::Tween::Kind
+  def calc(lf)
+    lf > 0.5_f32 ? 1.0_f32 : 0.0_f32
+  end
+end
+
 describe Glove::Tween do
   context "at start" do
     it "has progress 0%" do
@@ -168,6 +174,28 @@ describe Glove::Tween do
 
       tween.fraction.should eq(1.0)
       tween.linear_fraction.should eq(1.0)
+      tween.complete?.should be_true
+    end
+  end
+
+  context "custom tween" do
+    tween = Glove::Tween.new(1.0f32, Rounded)
+
+    it "should round down" do
+      tween.update(0.3f32)
+      tween.fraction.to_f64.should eq(0.0)
+      tween.complete?.should be_false
+    end
+
+    it "should round up" do
+      tween.update(0.3f32)
+      tween.fraction.to_f64.should eq(1.0)
+      tween.complete?.should be_false
+    end
+
+    it "should round complete" do
+      tween.update(0.4f32)
+      tween.fraction.to_f64.should eq(1.0)
       tween.complete?.should be_true
     end
   end
