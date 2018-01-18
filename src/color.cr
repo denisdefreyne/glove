@@ -12,12 +12,13 @@ struct Glove::Color
 
   def lerp(other : Glove::Color, t : Float32)
     t = { {0_f32, t}.max, 1_f32}.min
+    tn = 1.0_f32 - t
 
     Glove::Color.new(
-      (1.0_f32 - t) * r + t * other.r,
-      (1.0_f32 - t) * g + t * other.g,
-      (1.0_f32 - t) * b + t * other.b,
-      (1.0_f32 - t) * a + t * other.a,
+      tn * r + t * other.r,
+      tn * g + t * other.g,
+      tn * b + t * other.b,
+      tn * a + t * other.a,
     )
   end
 end
