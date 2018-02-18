@@ -1,5 +1,5 @@
 class Glove::Actions::MoveBy < Glove::IntervalAction
-  def initialize(@entity : Glove::Entity, dx : Float32, dy : Float32, duration : Float32, tween_kind : Glove::Tween::Kind)
+  def initialize(@entity : Glove::Entity, dx : Float32, dy : Float32, duration : Float32, tween_kind : Glove::Tween::Kind.class)
     super(duration)
     @tween = Glove::Tween.new(duration, tween_kind)
 
