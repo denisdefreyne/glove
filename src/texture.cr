@@ -6,7 +6,7 @@ class Glove::Texture
   def self.from(filename : String)
     LibGL.gen_textures(1, out texture_id)
 
-    data = LibSTBImage.load(filename, out width, out height, out comp, LibSTBImage::RGB_ALPHA)
+    data = LibSTBImage.load(filename, out width, out height, out comp, LibSTBImage::Channels::RGBAlpha)
 
     image_type =
       case comp
@@ -35,7 +35,7 @@ class Glove::Texture
       LibGL::UNSIGNED_BYTE,
       data.as(Void*)))
 
-    LibSTBImage.free(data)
+    LibSTBImage.image_free(data)
     gl_checked_void(LibGL.bind_texture(LibGL::TEXTURE_2D, 0))
 
     new(texture_id, width, height)

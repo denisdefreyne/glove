@@ -1,5 +1,5 @@
+require "lib_glew"
 require "./glfw"
-require "./glew"
 require "./gl"
 require "./metrics"
 
@@ -108,9 +108,9 @@ abstract class Glove::App < Glove::AbstractApp
     end
     LibGLFW.set_scroll_callback(@window, scroll_callback)
 
-    GLEW.experimental = LibGL::TRUE
+    LibGLEW.experimental = LibGL::TRUE
     Glove::GL.check_error("before GLEW.init")
-    unless GLEW.init == GLEW::OK
+    unless LibGLEW.init == LibGLEW::OK
       raise "GLEW.init failed"
     end
     Glove::GL.check_error("after GLEW.init")

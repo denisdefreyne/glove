@@ -1,12 +1,6 @@
 .PHONY: default
 default: spec
 
-.PHONY: ext
-ext:
-	@echo "*** Building ext…"
-	make -C src/ext
-	@echo
-
 .PHONY: doc
 doc:
 	@echo "*** Building documentation…"
@@ -15,7 +9,7 @@ doc:
 	@echo
 
 .PHONY: spec
-spec: ext
+spec:
 	@echo "*** Testing…"
 	crystal spec
 	@echo
