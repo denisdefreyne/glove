@@ -6,5 +6,8 @@ authors:
 
 license: MIT
 
-scripts:
-  postinstall: cd src/ext && make
+dependencies:
+  lib_stb_image:
+    github: calebuharrison/LibSTBImage
+  lib_glew:
+    github: lirith-engine/lib_glew
