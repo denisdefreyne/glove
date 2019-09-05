@@ -4,16 +4,15 @@ class Glove::ShaderProgram
     @uniform_locations = {} of String => Int32
   end
 
-  def self.from(vertex_shader_filename : String, fragment_shader_filename : String)
-    from(
-      File.read(vertex_shader_filename),
-      File.read(fragment_shader_filename)
-    )
+  def self.from(vertex_shader_path : Path, fragment_shader_path : Path)
+    from(File.read(vertex_shader_path), File.read(fragment_shader_path))
   end
-
-  def self.from(vertex_shader_code : IO, fragment_shader_code : IO)
-    vertex_shader = Glove::Shader.vertex(vertex_shader_code.to_s).compile
-    fragment_shader = Glove::Shader.fragment(fragment_shader_code.to_s).compile
+  def self.from(vertex_shader_io : IO, fragment_shader_io : IO)
+    from(vertex_shader_io.to_s, fragment_shader_io.to_s)
+  end
+  def self.from(vertex_shader_string : String, fragment_shader_string : String)
+    vertex_shader = Glove::Shader.vertex(vertex_shader_string).compile
+    fragment_shader = Glove::Shader.fragment(fragment_shader_string).compile
 
     program = Glove::ShaderProgram.new
     program.attach(vertex_shader)
