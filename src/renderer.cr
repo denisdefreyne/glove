@@ -17,15 +17,15 @@ class Glove::Renderer
 
   private def projection_matrix(entities : Glove::EntityCollection, camera : Glove::Entity?)
     projection_matrix = Glove::GLM::Mat4.identity
-    Glove::GLM.translate(projection_matrix, -1.0_f32, -1.0_f32)
-    Glove::GLM.scale(projection_matrix, 2.0_f32/@width, 2.0_f32/@height)
+      .translate!(-1.0_f32, -1.0_f32)
+      .scale!(2.0_f32/@width, 2.0_f32/@height)
 
     if camera
       if transform = camera[Glove::Components::Transform]?
-        Glove::GLM.translate(projection_matrix, @width/2_f32, @height/2_f32)
-        Glove::GLM.scale(projection_matrix, transform.scale_x, transform.scale_y)
-        Glove::GLM.rotate_z(projection_matrix, transform.angle)
-        Glove::GLM.translate(projection_matrix, -transform.translate_x, -transform.translate_y)
+        projection_matrix.translate!(@width/2_f32, @height/2_f32)
+          .scale!(transform.scale_x, transform.scale_y)
+          .rotate_z!(transform.angle)
+          .translate!(-transform.translate_x, -transform.translate_y)
       end
     end
 

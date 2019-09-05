@@ -29,23 +29,19 @@ class Glove::Components::Transform < Glove::Component
   end
 
   def matrix
-    Glove::GLM.identity(@model_matrix)
-    Glove::GLM.translate(@model_matrix, @translate_x, @translate_y)
-    Glove::GLM.rotate_z(@model_matrix, @angle)
-    Glove::GLM.scale(@model_matrix, @width * @scale_x, @height * @scale_y)
-    Glove::GLM.translate(@model_matrix, -@anchor_x, -@anchor_y)
-
-    @model_matrix
+    @model_matrix.identity!
+      .translate!(@translate_x, @translate_y)
+      .rotate_z!(@angle)
+      .scale!(@width * @scale_x, @height * @scale_y)
+      .translate!(-@anchor_x, -@anchor_y)
   end
 
   def matrix_for_child
-    Glove::GLM.identity(@child_model_matrix)
-    Glove::GLM.translate(@child_model_matrix, @translate_x, @translate_y)
-    Glove::GLM.rotate_z(@child_model_matrix, @angle)
-    Glove::GLM.scale(@child_model_matrix, @scale_x, @scale_y)
-    Glove::GLM.translate(@child_model_matrix, -@anchor_x, -@anchor_y)
-
-    @child_model_matrix
+    @child_model_matrix.identity!
+      .translate!(@translate_x, @translate_y)
+      .rotate_z!(@angle)
+      .scale!(@scale_x, @scale_y)
+      .translate!(-@anchor_x, -@anchor_y)
   end
 
   def bounds
