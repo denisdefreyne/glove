@@ -1,24 +1,3 @@
-# FIXME: propose moving these into Crystal std-library
-struct Float32
-  def self.zero
-    0_f32
-  end
-
-  def self.one
-    1_f32
-  end
-end
-
-struct Float64
-  def self.zero
-    0_f64
-  end
-
-  def self.one
-    1_f64
-  end
-end
-
 module Glove::GLM
   struct TMat4(T)
     @buffer : T*
@@ -28,26 +7,34 @@ module Glove::GLM
     end
 
     def self.identity
-      m = zero
-      m[0] = m[5] = m[10] = m[15] = T.one
-      m
+      zero.identity!
+    end
+    def identity!
+      update! do |i|
+        T.new(i % 5 != 0 ? 0 : 1)
+      end
     end
 
     def self.new(&block : Int32 -> T)
-      m = TMat4(T).new
-      p = m.to_unsafe
-      0.upto(15) { |i|
-        p[i] = yield i
-      }
-      m
+      TMat4(T).new.update!(&block)
     end
 
+    def update!(&block : Int32 -> T)
+      0.upto(15) do |i|
+        self[i] = yield i
+      end
+      self
+    end
+
+    def initialize(buffer : Pointer(T))
+      @buffer = buffer
+    end
     def initialize
-      @buffer = Pointer(T).malloc(16)
+      initialize Pointer(T).malloc(16)
     end
 
-    def buffer
-      @buffer
+    def clone
+      TMat4(T).new @buffer.clone
     end
 
     def to_unsafe
@@ -112,6 +99,75 @@ module Glove::GLM
       {new_x, new_y}
     end
 
+    def translate(dx : Float32, dy : Float32)
+      clone.translate!(dx, dy)
+    end
+    def translate!(dx : Float32, dy : Float32)
+      self[0, 3] = self[0, 0] * dx + self[0, 1] * dy + self[0, 3]
+      self[1, 3] = self[1, 0] * dx + self[1, 1] * dy + self[1, 3]
+      self[2, 3] = self[2, 0] * dx + self[2, 1] * dy + self[2, 3]
+      self[3, 3] = self[3, 0] * dx + self[3, 1] * dy + self[3, 3]
+
+      self
+    end
+
+    def scale(x : Float32, y : Float32)
+      clone.scale!(x, y)
+    end
+    def scale!(x : Float32, y : Float32)
+      self[0, 0] *= x
+      self[1, 0] *= x
+      self[2, 0] *= x
+      self[3, 0] *= x
+
+      self[0, 1] *= y
+      self[1, 1] *= y
+      self[2, 1] *= y
+      self[3, 1] *= y
+
+      self
+    end
+
+    def rotate_z(angle : Float32)
+      clone.scale!(angle)
+    end
+    def rotate_z!(angle : Float32)
+      sin = Math.sin(angle)
+      cos = Math.cos(angle)
+
+      tmp_00 = self[0, 0]
+      tmp_01 = self[0, 1]
+      tmp_02 = self[0, 2]
+      tmp_03 = self[0, 3]
+
+      tmp_10 = self[1, 0]
+      tmp_11 = self[1, 1]
+      tmp_12 = self[1, 2]
+      tmp_13 = self[1, 3]
+
+      tmp_20 = self[2, 0]
+      tmp_21 = self[2, 1]
+      tmp_22 = self[2, 2]
+      tmp_23 = self[2, 3]
+
+      tmp_30 = self[3, 0]
+      tmp_31 = self[3, 1]
+      tmp_32 = self[3, 2]
+      tmp_33 = self[3, 3]
+
+      self[0, 0] = tmp_00 * cos + tmp_01 * sin
+      self[1, 0] = tmp_10 * cos + tmp_11 * sin
+      self[2, 0] = tmp_20 * cos + tmp_21 * sin
+      self[3, 0] = tmp_30 * cos + tmp_31 * sin
+
+      self[0, 1] = -tmp_00 * sin + tmp_01 * cos
+      self[1, 1] = -tmp_10 * sin + tmp_11 * cos
+      self[2, 1] = -tmp_20 * sin + tmp_21 * cos
+      self[3, 1] = -tmp_30 * sin + tmp_31 * cos
+
+      self
+    end
+
     def inspect(io)
       io << String.build do |sb|
         sb << "+------------+------------+------------+------------+\n"
@@ -131,78 +187,30 @@ module Glove::GLM
   alias Mat4 = TMat4(Float32)
 
   def self.identity(mat : Mat4)
-    mat[0, 0] = 1_f32
-    mat[1, 0] = 0_f32
-    mat[2, 0] = 0_f32
-    mat[3, 0] = 0_f32
-
-    mat[0, 1] = 0_f32
-    mat[1, 1] = 1_f32
-    mat[2, 1] = 0_f32
-    mat[3, 1] = 0_f32
-
-    mat[0, 2] = 0_f32
-    mat[1, 2] = 0_f32
-    mat[2, 2] = 1_f32
-    mat[3, 2] = 0_f32
-
-    mat[0, 3] = 0_f32
-    mat[1, 3] = 0_f32
-    mat[2, 3] = 0_f32
-    mat[3, 3] = 1_f32
+    mat.identity
+  end
+  def self.identity!(mat : Mat4)
+    mat.identity!
   end
 
   def self.translate(mat : Mat4, dx : Float32, dy : Float32)
-    mat[0, 3] = mat[0, 0] * dx + mat[0, 1] * dy + mat[0, 3]
-    mat[1, 3] = mat[1, 0] * dx + mat[1, 1] * dy + mat[1, 3]
-    mat[2, 3] = mat[2, 0] * dx + mat[2, 1] * dy + mat[2, 3]
-    mat[3, 3] = mat[3, 0] * dx + mat[3, 1] * dy + mat[3, 3]
+    mat.translate(dx, dy)
+  end
+  def self.translate!(mat : Mat4, dx : Float32, dy : Float32)
+    mat.translate!(dx, dy)
   end
 
   def self.scale(mat : Mat4, x : Float32, y : Float32)
-    mat[0, 0] *= x
-    mat[1, 0] *= x
-    mat[2, 0] *= x
-    mat[3, 0] *= x
-
-    mat[0, 1] *= y
-    mat[1, 1] *= y
-    mat[2, 1] *= y
-    mat[3, 1] *= y
+    mat.scale(x, y)
+  end
+  def self.scale!(mat : Mat4, x : Float32, y : Float32)
+    mat.scale!(x, y)
   end
 
   def self.rotate_z(mat : Mat4, angle : Float32)
-    sin = Math.sin(angle)
-    cos = Math.cos(angle)
-
-    tmp_00 = mat[0, 0]
-    tmp_01 = mat[0, 1]
-    tmp_02 = mat[0, 2]
-    tmp_03 = mat[0, 3]
-
-    tmp_10 = mat[1, 0]
-    tmp_11 = mat[1, 1]
-    tmp_12 = mat[1, 2]
-    tmp_13 = mat[1, 3]
-
-    tmp_20 = mat[2, 0]
-    tmp_21 = mat[2, 1]
-    tmp_22 = mat[2, 2]
-    tmp_23 = mat[2, 3]
-
-    tmp_30 = mat[3, 0]
-    tmp_31 = mat[3, 1]
-    tmp_32 = mat[3, 2]
-    tmp_33 = mat[3, 3]
-
-    mat[0, 0] = tmp_00 * cos + tmp_01 * sin
-    mat[1, 0] = tmp_10 * cos + tmp_11 * sin
-    mat[2, 0] = tmp_20 * cos + tmp_21 * sin
-    mat[3, 0] = tmp_30 * cos + tmp_31 * sin
-
-    mat[0, 1] = -tmp_00 * sin + tmp_01 * cos
-    mat[1, 1] = -tmp_10 * sin + tmp_11 * cos
-    mat[2, 1] = -tmp_20 * sin + tmp_21 * cos
-    mat[3, 1] = -tmp_30 * sin + tmp_31 * cos
+    mat.rotate_z(angle)
+  end
+  def self.rotate_z!(mat : Mat4, angle : Float32)
+    mat.rotate_z!(angle)
   end
 end
