@@ -129,7 +129,7 @@ module Glove::GLM
     end
 
     def rotate_z(angle : Float32)
-      clone.scale!(angle)
+      clone.rotate_z!(angle)
     end
     def rotate_z!(angle : Float32)
       sin = Math.sin(angle)
