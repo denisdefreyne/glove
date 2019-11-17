@@ -11,5 +11,7 @@ dependencies:
     github: calebuharrison/LibSTBImage
   lib_glfw:
     github: calebuharrison/LibGLFW
+  lib_gl:
+    github: calebuharrison/LibGL
   lib_glew:
     github: lirith-engine/lib_glew

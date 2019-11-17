@@ -19,10 +19,10 @@ class Glove::Texture
       end
 
     gl_checked_void(LibGL.bind_texture(LibGL::TEXTURE_2D, texture_id))
-    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MIN_FILTER, LibGL::LINEAR))
-    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_MAG_FILTER, LibGL::LINEAR))
-    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_S, LibGL::REPEAT))
-    gl_checked_void(LibGL.tex_parameteri(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_T, LibGL::REPEAT))
+    gl_checked_void(LibGL.tex_parameter_i(LibGL::TEXTURE_2D, LibGL::TEXTURE_MIN_FILTER, LibGL::LINEAR))
+    gl_checked_void(LibGL.tex_parameter_i(LibGL::TEXTURE_2D, LibGL::TEXTURE_MAG_FILTER, LibGL::LINEAR))
+    gl_checked_void(LibGL.tex_parameter_i(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_S, LibGL::REPEAT))
+    gl_checked_void(LibGL.tex_parameter_i(LibGL::TEXTURE_2D, LibGL::TEXTURE_WRAP_T, LibGL::REPEAT))
 
     gl_checked_void(LibGL.tex_image_2d(
       LibGL::TEXTURE_2D,
