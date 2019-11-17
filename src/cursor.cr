@@ -2,7 +2,7 @@ class Glove::Cursor
   @x : Float32
   @y : Float32
 
-  def initialize(@window : LibGLFW::Window, @window_size : Glove::Size)
+  def initialize(@window : Pointer(LibGLFW::Window), @window_size : Glove::Size)
     @x = @window_size.width/2
     @y = @window_size.height/2
 
