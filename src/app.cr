@@ -1,5 +1,5 @@
 require "lib_glew"
-require "./glfw"
+require "lib_glfw"
 require "./gl"
 require "./metrics"
 
@@ -51,11 +51,11 @@ abstract class Glove::App < Glove::AbstractApp
     LibGLFW.window_hint(LibGLFW::OPENGL_PROFILE, LibGLFW::OPENGL_CORE_PROFILE)
 
     @window = LibGLFW.create_window(@width, @height, @title, nil, nil)
-    LibGLFW.set_current_context(@window)
+    LibGLFW.make_context_current(@window)
 
     @cursor = Glove::Cursor.new(@window, Glove::Size.new(@width.to_f32, @height.to_f32))
 
-    key_callback = ->(window : LibGLFW::Window, key : Int32, scancode : Int32, action : Int32, mods : Int32) do
+    key_callback = ->(window : Pointer(LibGLFW::Window), key : Int32, scancode : Int32, action : Int32, mods : Int32) do
       app = LibGLFW.get_window_user_pointer(window).as(App*).value
 
       direction =
@@ -74,7 +74,7 @@ abstract class Glove::App < Glove::AbstractApp
     end
     LibGLFW.set_key_callback(@window, key_callback)
 
-    mouse_button_callback = ->(window : LibGLFW::Window, button : Int32, action : Int32, mods : Int32) do
+    mouse_button_callback = ->(window : Pointer(LibGLFW::Window), button : Int32, action : Int32, mods : Int32) do
       app = LibGLFW.get_window_user_pointer(window).as(App*).value
 
       mouse_button =
@@ -96,13 +96,13 @@ abstract class Glove::App < Glove::AbstractApp
     end
     LibGLFW.set_mouse_button_callback(@window, mouse_button_callback)
 
-    cursor_pos_callback = ->(window : LibGLFW::Window, dx : Float64, dy : Float64) do
+    cursor_pos_callback = ->(window : Pointer(LibGLFW::Window), dx : Float64, dy : Float64) do
       app = LibGLFW.get_window_user_pointer(window).as(App*).value
       app.event_queue << Glove::Events::Moved.new(dx, dy)
     end
     LibGLFW.set_cursor_pos_callback(@window, cursor_pos_callback)
 
-    scroll_callback = ->(window : LibGLFW::Window, dx : Float64, dy : Float64) do
+    scroll_callback = ->(window : Pointer(LibGLFW::Window), dx : Float64, dy : Float64) do
       app = LibGLFW.get_window_user_pointer(window).as(App*).value
       app.event_queue << Glove::Events::Scrolled.new(dx, dy)
     end
