@@ -1,9 +1,14 @@
 module Glove::GLM
   struct TMat4(T)
-    @buffer : T*
+    include Indexable(T)
+    @buffer : StaticArray(T, 16)
 
     def self.zero
-      TMat4(T).new { T.zero }
+      self.new { T.zero }
+    end
+
+    def self.one
+      self.new { T.new(1) }
     end
 
     def self.identity
@@ -15,10 +20,6 @@ module Glove::GLM
       end
     end
 
-    def self.new(&block : Int32 -> T)
-      TMat4(T).new.update!(&block)
-    end
-
     def update!(&block : Int32 -> T)
       0.upto(15) do |i|
         self[i] = yield i
@@ -26,23 +27,29 @@ module Glove::GLM
       self
     end
 
-    def initialize(buffer : Pointer(T))
-      @buffer = buffer
-    end
     def initialize
-      initialize Pointer(T).malloc(16)
+      @buffer = StaticArray(T, 16).new(0)
+    end
+
+    def initialize(&block : Int32 -> T)
+      initialize
+      update!(&block)
     end
 
     def clone
-      TMat4(T).new @buffer.clone
+      self.class.new { |i| @buffer[i] }
     end
 
     def to_unsafe
-      @buffer
+      @buffer.to_unsafe
     end
 
-    def [](i)
-      raise IndexError.new if i < 0 || i >= 16
+    def size
+      16
+    end
+
+    def unsafe_fetch(i)
+      raise IndexError.new if i < 0 || i >= size
       @buffer[i]
     end
 
@@ -51,7 +58,7 @@ module Glove::GLM
     end
 
     def []=(i, value : T)
-      raise IndexError.new if i < 0 || i >= 16
+      raise IndexError.new if i < 0 || i >= size
       @buffer[i] = value
     end
 
@@ -59,35 +66,21 @@ module Glove::GLM
       self[row + col*4] = value
     end
 
-    def *(other : Mat4)
-      res = Mat4.identity
+    def ==(other)
+      zip(other).all? { |(a, b)| a == b }
+    end
 
-      mult = ->(res : Mat4, a : Mat4, b : Mat4, row : Int32, col : Int32) do
-        a[row, 0] * b[0, col] +
-        a[row, 1] * b[1, col] +
-        a[row, 2] * b[2, col] +
-        a[row, 3] * b[3, col]
+    def *(other : self)
+      res = self.class.identity
+
+      (0..3).each do |row|
+        (0..3).each do |col|
+          res[row, col] = self[row, 0] * other[0, col] +
+            self[row, 1] * other[1, col] +
+            self[row, 2] * other[2, col] +
+            self[row, 3] * other[3, col]
+        end
       end
-
-      res[0, 0] = mult.call(res, self, other, 0, 0)
-      res[0, 1] = mult.call(res, self, other, 0, 1)
-      res[0, 2] = mult.call(res, self, other, 0, 2)
-      res[0, 3] = mult.call(res, self, other, 0, 3)
-
-      res[1, 0] = mult.call(res, self, other, 1, 0)
-      res[1, 1] = mult.call(res, self, other, 1, 1)
-      res[1, 2] = mult.call(res, self, other, 1, 2)
-      res[1, 3] = mult.call(res, self, other, 1, 3)
-
-      res[2, 0] = mult.call(res, self, other, 2, 0)
-      res[2, 1] = mult.call(res, self, other, 2, 1)
-      res[2, 2] = mult.call(res, self, other, 2, 2)
-      res[2, 3] = mult.call(res, self, other, 2, 3)
-
-      res[3, 0] = mult.call(res, self, other, 3, 0)
-      res[3, 1] = mult.call(res, self, other, 3, 1)
-      res[3, 2] = mult.call(res, self, other, 3, 2)
-      res[3, 3] = mult.call(res, self, other, 3, 3)
 
       res
     end
